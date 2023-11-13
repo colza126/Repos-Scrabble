@@ -14,8 +14,9 @@ class Casella{
         this.x = 0;              
         this.y = 0;
     }
+
     //costruttore parametrico
-    public Casella(char _lettera, int _val, int _x, int_y){
+    public Casella(char _lettera, int _val, int _x, int _y){
         this.lettera = _lettera;       
         this.valore = _val;         
         this.x = _x;              
