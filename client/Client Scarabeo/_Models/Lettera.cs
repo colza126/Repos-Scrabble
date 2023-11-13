@@ -2,8 +2,12 @@ namespace ClientScarabeo;
 
 public class Lettera : Sprite, IDraggable
 {
-    public Lettera(Texture2D tex, Vector2 pos) : base(tex, pos)
+    public String lettera;
+
+    public Lettera(Texture2D tex, Vector2 pos, string lettera) : base(tex, pos)
     {
-        (this as IDraggable).RegisterDraggable();
+        this.lettera = lettera;
+        (this as IDraggable).RegisterDraggable(lettera);
+
     }
 }
