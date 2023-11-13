@@ -25,8 +25,8 @@ class server{
             //lettura della richiesta del client e salvataggio in apposita variabile
             richiesta = attendiRichiesta(socket);
 
-            //creazione 
-            Messaggio messaggio = new Messaggio();
+            //a questo punto ricezione contiene una stringa nel seguente formato "parola;xInizio;yInizio;xFine;yFine"//
+            
         }
 
         //chiudo la socket
