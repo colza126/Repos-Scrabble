@@ -1,5 +1,3 @@
-using Client_Scarabeo._Managers;
-
 namespace ClientScarabeo;
 
 public class Game1 : Game
@@ -7,12 +5,10 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
-    private coordManager c;
 
     public Game1()
     {
 
-        coordManager c;
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -29,7 +25,6 @@ public class Game1 : Game
         Globals.Content = Content;
 
         _gameManager = new(letters);
-        c = new();
 
         base.Initialize();
     }

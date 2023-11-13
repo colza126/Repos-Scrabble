@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
 //gestione del server
 class server{
     //elementi per la comunicazione con il client
@@ -9,7 +13,7 @@ class server{
     static DatagramPacket packet;
 
     //main
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         //variabili
         //booleano che identifica lo status della comunicazione
         boolean running = true;

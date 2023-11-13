@@ -16,7 +16,7 @@ public class Richiesta {
         this.yInizio = 0;
         this.yFine = 0;
     }
-    //costruttore parametrico
+    //costruttore parametrico 
     public Richiesta(String _parola, int _xI, int _yI, int _xF, int _yF){
         this.parola = _parola;
         this.xInizio = _xI;
@@ -26,9 +26,9 @@ public class Richiesta {
     }
 
     //realizzazione dell'oggetto richiesta mediante una stringa in input
-    public void creaRichiesta(string _input){
+    public void creaRichiesta(String _input){
         //split della stringa passata (parametri suddivisi da ';')
-        String[] risultato = input.split(";");
+        String[] risultato = _input.split(";");
 
         //assegnamento degli attributi passati all'interno dell'oggetto (dove necessario le stringhe vengono convertite a intero)
         Richiesta r = new Richiesta(risultato[0], Integer.parseInt(risultato[1]), Integer.parseInt(risultato[2]), Integer.parseInt(risultato[3]), Integer.parseInt(risultato[4]));
