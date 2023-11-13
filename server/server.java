@@ -29,6 +29,8 @@ class server{
 
             //creazione di una richiesta (la stringa precedente viene convertita in un oggetto con 5 attributi)
             Richiesta richiestaClient = new Richiesta();
+            //salvataggio degli attributi passati dal client nella richiesta
+            richiestaClient.creaRichiesta(richiesta);
 
         }
 
