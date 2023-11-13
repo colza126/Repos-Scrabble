@@ -1,7 +1,7 @@
 public class App {
     public static void main(String[] args) {
         
-        player p= new player();
+        Player p= new Player();
         p.assegnaLettere();
     }
 }
