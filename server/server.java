@@ -32,6 +32,9 @@ class server{
             //salvataggio degli attributi passati dal client nella richiesta
             richiestaClient.creaRichiesta(richiesta);
 
+            //-----------a questo punto richiesta contiene l'input del client suddiviso in un insieme di attributi----------//
+
+            
         }
 
         //chiudo la socket
