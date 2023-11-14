@@ -1,4 +1,8 @@
 //gestione del server
+
+import java.io.IOException;
+import java.net.*;
+
 class server{
     //elementi per la comunicazione con il client
     private static final int SOCKET_PORT = 666;
@@ -9,7 +13,7 @@ class server{
     static DatagramPacket packet;
 
     //main
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         //variabili
         //booleano che identifica lo status della comunicazione
         boolean running = true;
