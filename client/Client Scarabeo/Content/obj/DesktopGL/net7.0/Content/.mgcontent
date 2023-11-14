@@ -6,11 +6,13 @@
   <SourceFiles>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/A.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/b.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/button.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/c.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/Casella.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/d.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/e.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/f.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/font.spritefont</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/g.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/h.png</File>
     <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/i.png</File>
@@ -35,6 +37,8 @@
   </SourceFiles>
   <DestFiles>
     <File>a.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

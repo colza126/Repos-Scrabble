@@ -1,3 +1,5 @@
+using Client_Scarabeo._Managers;
+
 namespace ClientScarabeo;
 
 public class GameManager
@@ -5,10 +7,14 @@ public class GameManager
     private readonly List<Lettera> letters = new();
     private readonly List<Casella> casels = new();
 
-    
+    private readonly UIManager _ui = new();
+
+
 
     public GameManager(String[] lettereLista)
     {
+
+        _ui.AddButton(new(250+384, 800-24));
         var casella = Globals.Content.Load<Texture2D>("Casella");
 
         for (int i = 1; i <= 15; i++)
@@ -32,10 +38,12 @@ public class GameManager
     {
         InputManager.Update();
         DragDropManager.Update();
+        _ui.Update();
     }
 
     public void Draw()
     {
+        _ui.Draw();
         foreach (var item in casels)
         {
             item.Draw();

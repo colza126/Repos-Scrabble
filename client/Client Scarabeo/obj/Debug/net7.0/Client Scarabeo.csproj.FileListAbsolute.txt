@@ -132,3 +132,5 @@ C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\
 C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\obj\Debug\net7.0\Client Scarabeo.pdb
 C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\obj\Debug\net7.0\Client Scarabeo.genruntimeconfig.cache
 C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\obj\Debug\net7.0\ref\Client Scarabeo.dll
+C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\bin\Debug\net7.0\Content\button.xnb
+C:\Users\Lorenzo Colzani\Documents\GitHub\Repos-Scrabble\client\Client Scarabeo\bin\Debug\net7.0\Content\font.xnb

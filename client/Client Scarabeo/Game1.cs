@@ -1,3 +1,5 @@
+using Client_Scarabeo._Managers;
+
 namespace ClientScarabeo;
 
 public class Game1 : Game
@@ -5,6 +7,7 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
+    private connectionManager connectionManager;
 
     public Game1()
     {
