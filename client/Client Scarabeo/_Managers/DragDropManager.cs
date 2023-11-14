@@ -72,6 +72,7 @@ public static class DragDropManager
                 _cord_targ.ElementAt(i);
 
                 _draggables.RemoveAt(indexItem);
+                _targets.RemoveAt(i);
                 break;
             }
             i++;
