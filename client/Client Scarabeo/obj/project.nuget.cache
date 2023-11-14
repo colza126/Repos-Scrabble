@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fzvqtV3pY0czwdm5NO0cUHqBqbCdIEfsZjRjv6XfrEVBaP1l6uLQ4iYukI6hrl0yTwAV6yPE+GZbcyEezDkoTw==",
+  "dgSpecHash": "A4sIre5wHDGzVqZVSwC487eDZ+o8IgQJAAD/nYdsrMdr85XqoEV+DAacndRjNb1dcSUBiRIjlMpRv/WJIQ6ILQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lorenzo Colzani\\Documents\\informatica\\c#\\Quickie011-DragAndDrop\\Client Scarabeo.csproj",
+  "projectFilePath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\client\\Client Scarabeo\\Client Scarabeo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lorenzo Colzani\\.nuget\\packages\\monogame.content.builder.task\\3.8.1.303\\monogame.content.builder.task.3.8.1.303.nupkg.sha512",
     "C:\\Users\\Lorenzo Colzani\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.1.303\\monogame.framework.desktopgl.3.8.1.303.nupkg.sha512"

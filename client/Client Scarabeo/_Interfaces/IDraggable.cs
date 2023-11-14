@@ -1,3 +1,5 @@
+using Client_Scarabeo;
+
 namespace ClientScarabeo;
 
 public interface IDraggable
@@ -5,8 +7,8 @@ public interface IDraggable
     Rectangle Rectangle { get; }
     Vector2 Position { get; set; }
 
-    void RegisterDraggable()
+    void RegisterDraggable(String c)
     {
-        DragDropManager.AddDraggable(this);
+        DragDropManager.AddDraggable(this,c);
     }
 }

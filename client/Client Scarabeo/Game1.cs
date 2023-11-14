@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework.Graphics;
+using Client_Scarabeo._Managers;
 
 namespace ClientScarabeo;
 
@@ -7,9 +7,11 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
+    private connectionManager connectionManager;
 
     public Game1()
     {
+
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
@@ -17,13 +19,15 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        _graphics.PreferredBackBufferWidth = 1080;
-        _graphics.PreferredBackBufferHeight = 1254;
+        String[] letters = { "a", "b","c","d","e","f","g","h"};
+
+        _graphics.PreferredBackBufferWidth = 735;
+        _graphics.PreferredBackBufferHeight = 853;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
 
-        _gameManager = new();
+        _gameManager = new(letters);
 
         base.Initialize();
     }

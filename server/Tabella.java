@@ -12,6 +12,49 @@ class Tabella {
         this.tabella = _tabella;
     }
 
+    public boolean controlloLibera(int x,int y,char lettera){
+        if(tabella[x][y] == null || tabella[x][y].lettera == lettera){
+            return true;
+        }
+        return false;
+    }
+/* 
+    public boolean controlloCentrale(int x,int y,char lettera){
+        if(tabella[x][y] == null || tabella[x][y].lettera == lettera){
+            return true;
+        }
+        return false;
+    }
+*/
+    public boolean controlloMaster(int x, int y,String parola,char direzione){
+        for (int i = 0; i < parola.length(); i++) {
+            if(direzione == 'r'){
+                if(!controlloLibera(x+i,y,parola.charAt(i))){
+                    return false;
+                }
+            }else if(direzione == 'd'){
+                if(!controlloLibera(x,y+i,parola.charAt(i))){
+                    return false;
+                }
+            }
+            
+        }
+        return true;
+    }
+
+    public void aggiungiParola(int x, int y,String parola,char direzione){
+        if(controlloMaster(x, y, parola, direzione)){
+            for (int i = 0; i < parola.length(); i++) {
+                if(direzione == 'r'){
+                        tabella[x+1][y].lettera = parola.charAt(i);
+                }else if(direzione == 'd'){
+                    tabella[x][y+1].lettera = parola.charAt(i);
+                }
+                
+            }
+        }
+    }
+
     // metodo che assegna il valore ad ogni casella della tabella (valore relativo al moltiplicatore di ogni singola casella)
     public void assegnaValori() {
         //variabile d'appoggio

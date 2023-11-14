@@ -1,57 +1,100 @@
+using Client_Scarabeo;
+
 namespace ClientScarabeo;
 
 public static class DragDropManager
 {
+    //creo lista degli intem prendibili e posizioni associati
     private static readonly List<IDraggable> _draggables = new();
+    public static List<String> letters = new();
+    //lista delle caselle
     private static readonly List<ITargetable> _targets = new();
+    public static List<Coordinate> _cord_targ = new();
+    //item attualmente draggato
     private static IDraggable _dragItem;
+    public static int indexItem;
 
-    public static void AddDraggable(IDraggable item)
+    //aggiungi alla lista gli item prendibli
+    public static void AddDraggable(IDraggable item, String let)
     {
         _draggables.Add(item);
+        letters.Add(let);
     }
 
-    public static void AddTarget(ITargetable item)
+    //aggiungi alla lista gli item target
+    public static void AddTarget(ITargetable item, Coordinate c)
     {
         _targets.Add(item);
+        _cord_targ.Add(c);
     }
 
+    //controllo l'inizio del drag
     private static void CheckDragStart()
     {
+        //se il mouse e' cliccato
         if (InputManager.MouseClicked)
         {
+            //per ogni item nella lista
+            int i = 0;
             foreach (var item in _draggables)
             {
+                //trova quello preso
                 if (item.Rectangle.Contains(InputManager.MousePosition))
                 {
+                    indexItem = i;
+                    //mettilo nella variabile
                     _dragItem = item;
+                    //letters.ElementAt(i);
+
                     break;
                 }
+                i++;
             }
         }
     }
 
+    //controllo target
     private static void CheckTarget()
     {
+        //per ogni target nella lista
+        int i = 0;
         foreach (var item in _targets)
         {
+            //se presente dentro il grabber
             if (item.Rectangle.Contains(InputManager.MousePosition))
             {
+                
+                //metti l'item nella stessa posizione
                 _dragItem.Position = item.Position;
+
+                //da aggiungere output con x,y e lettera
+                _cord_targ.ElementAt(i);
+                _cord_targ.ElementAt(i);
+
+                _draggables.RemoveAt(indexItem);
                 break;
             }
+            i++;
         }
     }
 
+    //funzione che controlla la fine dello spostamento
     private static void CheckDragStop()
     {
+        //se il muose e' stato rilasciato
         if (InputManager.MouseReleased)
         {
+            //richiama la funzione gia descritta sopra
             CheckTarget();
+
+
+            //item attualmente in presa nullo
             _dragItem = null;
+            indexItem = 0;
         }
     }
 
+    //funzione update che applica tutte quelle prima
     public static void Update()
     {
         CheckDragStart();

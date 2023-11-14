@@ -108,11 +108,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lorenzo Colzani\\Documents\\informatica\\c#\\Quickie011-DragAndDrop\\Client Scarabeo.csproj",
+      "projectUniqueName": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\client\\Client Scarabeo\\Client Scarabeo.csproj",
       "projectName": "Client Scarabeo",
-      "projectPath": "C:\\Users\\Lorenzo Colzani\\Documents\\informatica\\c#\\Quickie011-DragAndDrop\\Client Scarabeo.csproj",
+      "projectPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\client\\Client Scarabeo\\Client Scarabeo.csproj",
       "packagesPath": "C:\\Users\\Lorenzo Colzani\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lorenzo Colzani\\Documents\\informatica\\c#\\Quickie011-DragAndDrop\\obj\\",
+      "outputPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\client\\Client Scarabeo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

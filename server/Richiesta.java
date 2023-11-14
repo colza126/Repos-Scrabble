@@ -16,7 +16,7 @@ public class Richiesta {
         this.yInizio = 0;
         this.yFine = 0;
     }
-    //costruttore parametrico
+    //costruttore parametrico 
     public Richiesta(String _parola, int _xI, int _yI, int _xF, int _yF){
         this.parola = _parola;
         this.xInizio = _xI;
