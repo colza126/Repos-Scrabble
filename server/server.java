@@ -3,6 +3,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 //gestione del server
+
+import java.io.IOException;
+import java.net.*;
+
 class server{
     //elementi per la comunicazione con il client
     private static final int SOCKET_PORT = 666;
