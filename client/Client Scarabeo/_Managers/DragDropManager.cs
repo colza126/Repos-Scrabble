@@ -12,6 +12,7 @@ public static class DragDropManager
     public static List<Coordinate> _cord_targ = new();
     //item attualmente draggato
     private static IDraggable _dragItem;
+    public static int indexItem;
 
     //aggiungi alla lista gli item prendibli
     public static void AddDraggable(IDraggable item, String let)
@@ -40,6 +41,7 @@ public static class DragDropManager
                 //trova quello preso
                 if (item.Rectangle.Contains(InputManager.MousePosition))
                 {
+                    indexItem = i;
                     //mettilo nella variabile
                     _dragItem = item;
                     //letters.ElementAt(i);
@@ -61,15 +63,15 @@ public static class DragDropManager
             //se presente dentro il grabber
             if (item.Rectangle.Contains(InputManager.MousePosition))
             {
+                
                 //metti l'item nella stessa posizione
                 _dragItem.Position = item.Position;
 
                 //da aggiungere output con x,y e lettera
-
                 _cord_targ.ElementAt(i);
                 _cord_targ.ElementAt(i);
 
-
+                _draggables.RemoveAt(indexItem);
                 break;
             }
             i++;
@@ -88,6 +90,7 @@ public static class DragDropManager
 
             //item attualmente in presa nullo
             _dragItem = null;
+            indexItem = 0;
         }
     }
 

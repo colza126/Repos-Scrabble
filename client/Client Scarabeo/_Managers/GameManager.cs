@@ -29,7 +29,7 @@ public class GameManager
         {
             var lettere = Globals.Content.Load<Texture2D>(lettereLista[i]);
 
-            letters.Add(new(lettere, new(250 + (i * 48), 800), lettereLista[i]));
+            letters.Add(new(lettere, new(200 + (i * 48), 800), lettereLista[i]));
 
         }
     }
