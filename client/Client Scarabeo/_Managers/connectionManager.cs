@@ -63,7 +63,7 @@ namespace Client_Scarabeo._Managers
             }
         }
 
-        //funzione che manda un messaggio e lo ritorna come stringa
+        //funzione che riceve un messaggio e lo ritorna come stringa
         public string ReceiveMessage()
         {
             //try catch per gestire gli errori 

@@ -8,6 +8,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
     private connectionManager connectionManager;
+    private String s = Messaggio.stringa_messaggio;
 
     public Game1()
     {
@@ -19,14 +20,31 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        String[] letters = { "a", "b","c","d","e","f","g","h"};
+        /*
+        //set up della connesione 
+        String ip = "127.0.0.1";
+        int port = 666;
+        connectionManager = new(ip, port);
+        //handshake
+        connectionManager.Connect();
+
+        //prendo valori e lettere
+        String[] valori = connectionManager.ReceiveMessage().Split(";");
+        String[] letters = {};
+        int j = 0;
+        //riempio l'array lettere di valori in modo da aggiornalo
+        for (int i = letters.Length; i < 8; i++)
+        {
+            letters[i] = valori[j].Trim();
+            j++;
+        }*/
 
         _graphics.PreferredBackBufferWidth = 735;
         _graphics.PreferredBackBufferHeight = 853;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
-
+        String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" };
         _gameManager = new(letters);
 
         base.Initialize();
