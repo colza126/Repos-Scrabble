@@ -1,4 +1,9 @@
 //classe che caratterizza la mappa dell'intero progetto
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 class Tabella {
     //attributi
     //numero delle caselle per ogni riga e per ogni colonna
@@ -32,46 +37,64 @@ class Tabella {
         boolean work=true;
         char direction= ' ';
 
-        //1. controllo direzione di inserimento della parola
+        //1. controllo che la parola sia composta da almeno 2 lettere
+        //verifica lunghezza
+        if(_parola.lunghezza<=1)
+            //inserita una singola lettera (input non adatto)
+            return false;
+        
+        //2. controllo direzione di inserimento della parola
         //verifica direzione
         direction = _parola.checkDirezione();
         //controllo integrità
         if(direction == ' ')
             return false;
 
-        //2. controllo che la parola sia stata inserita in casell consecutive (verticae o orizzontale)
+        //3. controllo che la parola sia stata inserita in casell consecutive (verticae o orizzontale)
         work = controllaLinearita(_parola, direction);
         //controllo integrità
         if(work == false)
             return false;
 
-        //3. controllo che la casella centrale non sia vuota
+        //4. controllo che la casella centrale non sia vuota
         //controllo se ci si trova nel primo inserimento --> in questo caso la casella centrale deve obbligatoriamente essere occupata
         work = controllaCasellaCentrale(_parola, direction);
         //controllo integrità
         if(work == false)
             return false;
         
-        //4. controllo che non si esca dalla tabella
-        //verifica della posizione delle varie caselle
-        work = controlloPosizioniCaselle(_parola);
+        //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
+        //verifica delle caselle
+        work = controllaEstremi(_parola, direction);
         //controllo integrità
         if(work == false)
             return false;
+
+        //6. controllo che non si esca dalla tabella
+        //verifica della posizione delle varie caselle
+        //work = controlloPosizioniCaselle(_parola);
+        //controllo integrità
+        //if(work == false)
+           // return false;
         
-        //5. controllo che non si intersechino caselle già occupate
+        //6. controllo che non si intersechino caselle già occupate
         //verifica della posizione delle varie caselle
-        //work = controlloCasellePiene(_parola, direction);
+        work = controlloCasellePiene(_parola, direction);
         //controllo integrità
         if(work == false)
             return false;
 
-
+        //7. controllo che la parola inserita sia salvata nel dizionario
+        //verifica dell'esistenza della parola
+        work = checkDizionario(_parola);
+        //controllo integrità
+        if(work == false)
+            return false;
 
         return true;
     }
 
-    //controllo che la casella centrale della tabella sia piena
+    //3. controllo che la casella centrale della tabella sia piena
     public boolean controllaLinearita(Parola _parola, char _direzione){
         //controllo che il giocatore abbia inserito la parola in maniera adeguata per quel che riguarda la consecutività delle caselle
         //(verifico che le lettere si trovino in caselle successive e in una singola riga/colonna)
@@ -106,7 +129,7 @@ class Tabella {
     }
     
 
-    //controllo che la casella centrale della tabella sia piena
+    //4. controllo che la casella centrale della tabella sia piena
     public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
         //variabile di lavoro
         boolean work=true;
@@ -170,7 +193,56 @@ class Tabella {
         //return false--> parola non inserita correttamente (casella centrale vuota)
     }
 
-    //controllo che la casella centrale della tabella sia piena
+    //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
+    public boolean controllaEstremi(Parola _parola, char _direzione){
+        //metodo che controlla se la casella precedente all'inizio e quella successiva alla fine siano vuote
+
+        //parola inserita in verticale
+        if(_direzione == 'l'){
+            //controllo che la casella superiore alla prima non sia parte del bordo
+            if(_parola.vettore.get(0).y != 0)
+                //se la casella precedente alla prima non è parte del bordo
+                //controllo se la stassa casella è piena
+                if(this.tabella[_parola.vettore.get(0).x][_parola.vettore.get(0).y-1] != null)
+                    //x errata
+                    return false;
+            
+            //controllo che la casella inferiore all'ultima non sia parte del bordo
+            if(_parola.vettore.get(_parola.lunghezza-1).y != NUM_CASELLE)
+                //se la casella superiore all'ultima non è parte del bordo
+                //controllo se la stassa casella è piena
+                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x][_parola.vettore.get(_parola.lunghezza-1).y+1] != null)
+                    //y errata
+                    return false;
+        }
+
+        //parola inserita in orizzontale
+        else{
+            //controllo che la casella a sinistra della prima non sia parte del bordo
+            if(_parola.vettore.get(0).x != 0)
+                //se la casella precedente alla prima non è parte del bordo
+                //controllo se la stassa casella è piena
+                if(this.tabella[_parola.vettore.get(0).x-1][_parola.vettore.get(0).y] != null)
+                    //x errata
+                    return false;
+            
+            //controllo che la casella a destra dell'ultima non sia parte del bordo
+            if(_parola.vettore.get(_parola.lunghezza-1).x != NUM_CASELLE)
+                //se la casella superiore all'ultima non è parte del bordo
+                //controllo se la stassa casella è piena
+                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x+1][_parola.vettore.get(_parola.lunghezza-1).y] != null)
+                    //y errata
+                    return false;
+        }
+
+        //se si passano tutti i controlli la parola passata è giusta sotto questo punto di vista
+        return true;
+
+        //return true--> parola inserita correttamente per quel che riguarda le caselle agli estremi (prima e dopo c'è una casella vuota o il bordo)
+        //return false--> parola non inserita correttamente (estremi pieni e non arte del bordo)
+    }
+
+    /*//6. controllo che la casella centrale della tabella sia piena
     public boolean controlloPosizioniCaselle(Parola _parola){
         //----------per effettuare questo controllo basta verificare che x e y della prima e dell'ultima casella siano nei limiti----------\\
         //doppio controllo sulle x e le y della prima e dell'ultima casella
@@ -180,25 +252,93 @@ class Tabella {
 
         //return true--> parola inserita correttamente per quel che riguarda la posizione (nessuna lettera esce dalla tabella)
         //return false--> parola non inserita correttamente (una o pù lettere scono dalla tabella)
-    }
-
-    /*public void aggiungiParola(int x, int y,String parola,char direzione){
-        if(controlloMaster(x, y, parola, direzione)){
-            for (int i = 0; i < parola.length(); i++) {
-                if(direzione == 'r'){
-                        tabella[x+1][y].lettera = parola.charAt(i);
-                }else if(direzione == 'd'){
-                    tabella[x][y+1].lettera = parola.charAt(i);
-                }
-                
-            }
-        }
     }*/
 
-    //controllo che le caselle in cui si vogliono inserire le lettere non siano già piene
+    //6. controllo che le caselle in cui si vogliono inserire le lettere non siano già piene
     /*public boolean controlloCasellePiene(Richiesta _parola, char _direzione){
         //
     }*/
+
+    //6. controllo che non si intersechino caselle già occupate
+    public boolean controlloCasellePiene(Parola _parola, char _direzione){
+        //scorrimento di tutte le lettere  e delle rispettive posizioni, confronto di queste con le corrispondenti posizioni della tabella
+
+        //scorrimento di tutte le lettere della parola
+        for(int i=0; i < _parola.lunghezza;i++){
+            //controllo per ogni lettera se la tabella, nella casella in cui si vuole inserire quella lettera non è piena
+            if(this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y] !=null)
+                return false;
+        }
+
+        //se si passano i vari controlli significa che la parola è stta inserita correttamente
+        return true;
+
+        //return true--> parola inserita correttamente per quel che riguarda le caselle scelte (tutte le caselle erano vuote)
+        //return false--> parola non inserita correttamente (una o più caselle già occupata)
+    }
+
+    //7. controllo che la parola inserita sia presente nel dizionario
+    public boolean checkDizionario(Parola _parola){
+        //salvataggio della parola inserita in una stringa
+        //variabili di lavoro
+        String parola = "";
+        String parolaDizionario = "";
+
+        //scorrimento di tutte le lettere
+        for(int i=0; i < _parola.lunghezza; i++)
+            //aggiunta di ogni carattere alla parola
+            parola+=_parola.vettore.get(i).contenuto;
+
+        //scorrimento di tutto il dizionario e confronta della parola inserita con quelle del dizionario stesso
+
+        //gstione errori
+        try {
+            //percorso del file dizionario
+            File file = new File("parole.txt");
+            
+            //creazione scanner per la lettura del file
+            Scanner scanner = new Scanner(file);
+            
+            //scorrimento di tutte le parole del file
+            while (scanner.hasNext()) {
+                //lettura di ogni parola del dizionario
+                parolaDizionario=scanner.nextLine();
+
+                //confronto della parola inserita con ogni parola del dizionario
+                if(parola == parolaDizionario)
+                    //parola esistente
+                    return true;
+            }
+            
+            //chiusura sanner
+            scanner.close();
+        } catch (FileNotFoundException e) { //gestione errori
+            e.printStackTrace();
+        }
+
+        //se si passano i vari controlli significa che la parola inseerita non è corretta
+        return false;
+
+        //return true--> parola inserita correttamente (parola esistente nel dizionario italiano)
+        //return false--> parola non inserita correttamente (non sensata)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // metodo che assegna il valore ad ogni casella della tabella (valore relativo al moltiplicatore di ogni singola casella)
     public void assegnaValori() {
