@@ -5,7 +5,7 @@ import java.util.List;
 public class Parola {
     //attributi
     int lunghezza;
-    List<Lettera> vettore;
+    List<Lettera> vettore = new ArrayList<Lettera>();
 
     //metodi
     //costruttore di default
@@ -45,13 +45,13 @@ public class Parola {
 
         //variabile di return
         char direzione = ' ';
-
+        
         //parola inserita in verticale
-        if((this.vettore[0].x == this.xFine) && (this.yInizio != this.yFine))
+        if((this.vettore.get(0).x == this.vettore.get(vettore.size()).x) && (this.vettore.get(0).y != this.vettore.get(vettore.size()).y))
             direzione='l';      //l = low         
 
         //parola inserita in orizzontale
-        else if((this.yInizio == this.yFine) && (this.xInizio != this.xFine))
+        else if((this.vettore.get(0).x == this.vettore.get(vettore.size()).x) && (this.vettore.get(0).y != this.vettore.get(vettore.size()).y))
             direzione='r';      //r = right
         
         //----------a questo punto se non c'è stato alcun return vuol dire che quantomeno la prima e l'ultima lettera non sono state inserite in maniera corretta----------\\

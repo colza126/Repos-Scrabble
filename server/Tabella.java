@@ -6,7 +6,7 @@ class Tabella {
     //casella centrale (sia in verticale che in orizzontale)
     public final static int CASELLA_CENTRALE = 7;
     //matrice di caselle
-    Casella[][] tabella;
+    Casella[][] tabella = new Casella[NUM_CASELLE][NUM_CASELLE];
 
     //metodi
     //costruttore di default
@@ -92,13 +92,13 @@ class Tabella {
             if(_direzione == 'l')
             {
                 //controllo sulle x (la x è uguale per tutte le caselle, per cui deve essere quella centrale)
-                if(_richiesta.xInizio != CASELLA_CENTRALE)
+                if(_richiesta.vettore.get(0).x  != CASELLA_CENTRALE)
                     //casella centrale non inserita
                     return false;
                 //controllo sulle  y
                 else{
                     //controllo se le lettere passano per il centro
-                    if((_richiesta.yInizio <= CASELLA_CENTRALE)&&(_richiesta.yFine >= CASELLA_CENTRALE))
+                    if((_richiesta.vettore.get(0).y  <= CASELLA_CENTRALE)&&(_richiesta.vettore.get(_richiesta.vettore.size()).y >= CASELLA_CENTRALE))
                         //casella centrale inserita
                         return true;
                     //se non passano per il centro
@@ -109,13 +109,13 @@ class Tabella {
             //se la parola deve essere inserita in orizzontale
             else {
                 //controllo sulle y (la y è uguale per tutte le caselle, per cui deve essere quella centrale)
-                if(_richiesta.yInizio != CASELLA_CENTRALE)
+                if(_richiesta.vettore.get(0).y  != CASELLA_CENTRALE)
                     //casella centrale non inserita
                     return false;
                 //controllo sulle  x
                 else{
                     //controllo se le lettere passano per il centro
-                    if((_richiesta.xInizio <= CASELLA_CENTRALE)&&(_richiesta.xFine >= CASELLA_CENTRALE))
+                    if((_richiesta.vettore.get(0).x  <= CASELLA_CENTRALE)&&(_richiesta.vettore.get(_richiesta.vettore.size()).x >= CASELLA_CENTRALE))
                         //casella centrale inserita
                         return true;
                     //se non passano per il centro
@@ -133,7 +133,7 @@ class Tabella {
     public boolean controlloPosizioniCaselle(Parola _richiesta){
         //----------per effettuare questo controllo basta verificare che x e y della prima e dell'ultima casella siano nei limiti----------\\
         //doppio controllo sulle x e le y della prima e dell'ultima casella
-        if((_richiesta.xInizio >= 0) && (_richiesta.xInizio < NUM_CASELLE) && (_richiesta.xFine >= 0) && (_richiesta.xFine < NUM_CASELLE) && (_richiesta.yInizio >= 0) && (_richiesta.yInizio < NUM_CASELLE) &&(_richiesta.yFine >= 0) && (_richiesta.yFine < NUM_CASELLE))
+        if((_richiesta.vettore.get(0).x >= 0) && (_richiesta.vettore.get(0).x < NUM_CASELLE) && (_richiesta.vettore.get(_richiesta.vettore.size()).x >= 0) && (_richiesta.vettore.get(_richiesta.vettore.size()).x  < NUM_CASELLE) && (_richiesta.vettore.get(0).y >= 0) && (_richiesta.vettore.get(0).y < NUM_CASELLE) && (_richiesta.vettore.get(_richiesta.vettore.size()).y >= 0) && (_richiesta.vettore.get(_richiesta.vettore.size()).y  < NUM_CASELLE))
             return true;
         return false;  
 
