@@ -6,6 +6,7 @@ public class App {
         ConnectionManager c = new ConnectionManager(porta, ip);
 
         c.initializeServer();
-        
+        c.receiveMessage();
+        c.inviaMessaggio("salve");
     }
 }

@@ -1,8 +1,5 @@
-using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 
 namespace test_client_tcp
 {
@@ -37,6 +34,8 @@ namespace test_client_tcp
                 stream = tcpClient.GetStream();
 
                 //ora il server e' connesso
+                Console.WriteLine("connesso ");
+
             }
             catch (Exception ex)
             {
