@@ -31,7 +31,7 @@ class server{
         while(running)
         {
             //lettura della richiesta del client e salvataggio in apposita variabile
-            parola = attendiRichiesta(socket);
+            parola = attendiParola(socket);
 
             //----------a questo punto parola contiene una stringa nel seguente formato "lunghezza/lettera,x,y; altre lettere..."----------\\
 
@@ -53,7 +53,7 @@ class server{
      * @return String contenente la richiesta del client
      * @throws IOException
      */
-    public static String attendiRichiesta(DatagramSocket socket) throws IOException
+    public static String attendiParola(DatagramSocket socket) throws IOException
     {
         //stringa in cui verrà immagazzinato il messaggio
         String buff = "";
