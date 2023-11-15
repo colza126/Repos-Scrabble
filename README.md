@@ -1,4 +1,4 @@
-# Repository del progetto SCARABEO di Colzani e Finazzi
+# Repository del progetto SCARABEO di Colzani Lorenzo e Finazzi Andrea
 
 ### Struttura diretory
 
