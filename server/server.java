@@ -1,3 +1,4 @@
+//cose da fare: punteggi per lettera e per casella; posizionamento parola nella tabella; comunicazione punteggi, tabella e eventuali errori
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -19,8 +20,7 @@ class server{
         boolean running = true;
         //richiesta del client
         String parola;
-        //direzione della parola (in base a come la inserisce l'utente)
-        char direzione;
+        
         //dichiarazione tabella
         Tabella tab = new Tabella();
 
@@ -43,9 +43,9 @@ class server{
             String statoInserimento = tab.controlloMaster(parolaClient);
 
             //controllo se è stato passato un messaggio d'errore
-            //if(statoInserimento != "")
+            if(statoInserimento != "")
                 //scrittura al client del tipo di errore effettuato
-                //comunicaErrore(statoInserimento);
+                inviaRisposta(statoInserimento);
         }
 
         //chiudo la socket
@@ -83,6 +83,6 @@ class server{
      */
     public static void inviaRisposta(String risposta) throws IOException
     {
-        /////implementare metodo che invii una stringa di risposta al client
+        //implementare il metodo che comunica con il client
     }
 }
