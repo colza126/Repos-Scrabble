@@ -59,6 +59,5 @@ public class Richiesta {
 
         //restituzione direzione
         return direzione;
-        
     }
 }
