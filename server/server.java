@@ -19,7 +19,7 @@ class server{
         //booleano che identifica lo status della comunicazione
         boolean running = true;
         //richiesta del client
-        String richiesta;
+        String parola;
         //direzione della parola (in base a come la inserisce l'utente)
         char direzione;
         //dichiarazione tabella
@@ -32,18 +32,16 @@ class server{
         while(running)
         {
             //lettura della richiesta del client e salvataggio in apposita variabile
-            richiesta = attendiRichiesta(socket);
+            parola = attendiRichiesta(socket);
 
-            //----------a questo punto richiesta contiene una stringa nel seguente formato "parola;xInizio;yInizio;xFine;yFine"----------\\
+            //----------a questo punto parola contiene una stringa nel seguente formato "lunghezza/lettera,x,y; altre lettere..."----------\\
 
-            //creazione di una richiesta (la stringa precedente viene convertita in un oggetto con 5 attributi)
-            Richiesta richiestaClient = new Richiesta();
-            //salvataggio degli attributi passati dal client nella richiesta
-            richiestaClient.creaRichiesta(richiesta);
+            //creazione di una parola (la stringa precedente viene convertita in un oggetto)
+            Parola parolaClient = new Parola(parola);
 
-            //----------a questo punto richiesta contiene l'input del client suddiviso in un insieme di attributi----------\\
+            //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
             //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-            boolean statoInserimento = tab.controlloMaster(richiestaClient);
+            boolean statoInserimento = tab.controlloMaster(parolaClient);
         }
 
         //chiudo la socket
@@ -67,8 +65,8 @@ class server{
         //salvataggio del messaggio del client in apposita variabile
         buff = new String(packet.getData(), 0, packet.getLength());
 
-        //stampo il messagio ricevuto
-        //System.out.println(ricevuto);
+        //----------il messaggio del client è salvato in buff con il seguente formato: "3/C,1,1;I,1,2;A,1,3;o,1,4" (numero caratteri/lettera, x, y/ ... altre lettere ...)----------\
+        
         
         //restituzione della stringa ottenuta
         return buff;

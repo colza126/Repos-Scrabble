@@ -27,7 +27,7 @@ class Tabella {
     }*/
 
     //metodo nel quale si richiamano tutti i controlli
-    public boolean controlloMaster(Richiesta _richiesta){
+    public boolean controlloMaster(Parola _richiesta){
         //variabile d'appoggio
         boolean work=true;
         char direction= ' ';
@@ -66,7 +66,7 @@ class Tabella {
     }
 
     //controllo che la casella centrale della tabella sia piena
-    public boolean controllaCasellaCentrale(Richiesta _richiesta, char _direzione){
+    public boolean controllaCasellaCentrale(Parola _richiesta, char _direzione){
         //variabile di lavoro
         boolean work=true;
 
@@ -130,7 +130,7 @@ class Tabella {
     }
 
     //controllo che la casella centrale della tabella sia piena
-    public boolean controlloPosizioniCaselle(Richiesta _richiesta){
+    public boolean controlloPosizioniCaselle(Parola _richiesta){
         //----------per effettuare questo controllo basta verificare che x e y della prima e dell'ultima casella siano nei limiti----------\\
         //doppio controllo sulle x e le y della prima e dell'ultima casella
         if((_richiesta.xInizio >= 0) && (_richiesta.xInizio < NUM_CASELLE) && (_richiesta.xFine >= 0) && (_richiesta.xFine < NUM_CASELLE) && (_richiesta.yInizio >= 0) && (_richiesta.yInizio < NUM_CASELLE) &&(_richiesta.yFine >= 0) && (_richiesta.yFine < NUM_CASELLE))
