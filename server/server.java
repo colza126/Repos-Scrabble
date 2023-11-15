@@ -40,7 +40,12 @@ class server{
 
             //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
             //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-            boolean statoInserimento = tab.controlloMaster(parolaClient);
+            String statoInserimento = tab.controlloMaster(parolaClient);
+
+            //controllo se è stato passato un messaggio d'errore
+            //if(statoInserimento != "")
+                //scrittura al client del tipo di errore effettuato
+                //comunicaErrore(statoInserimento);
         }
 
         //chiudo la socket

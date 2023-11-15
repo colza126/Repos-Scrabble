@@ -32,7 +32,7 @@ class Tabella {
     }*/
 
     //metodo nel quale si richiamano tutti i controlli
-    public boolean controlloMaster(Parola _parola){
+    public String controlloMaster(Parola _parola){
         //variabile d'appoggio
         boolean work=true;
         char direction= ' ';
@@ -41,34 +41,34 @@ class Tabella {
         //verifica lunghezza
         if(_parola.lunghezza<=1)
             //inserita una singola lettera (input non adatto)
-            return false;
+            return "La parola deve essere lunga almeno 2 caratteri";
         
         //2. controllo direzione di inserimento della parola
         //verifica direzione
         direction = _parola.checkDirezione();
         //controllo integrità
         if(direction == ' ')
-            return false;
+            return "La parola non è stata inserita in caselle conseutive né in orizzontale, né in verticale";
 
-        //3. controllo che la parola sia stata inserita in casell consecutive (verticae o orizzontale)
+        //3. controllo che la parola sia stata inserita in caselle consecutive (verticale o orizzontale)
         work = controllaLinearita(_parola, direction);
         //controllo integrità
         if(work == false)
-            return false;
+            return "La parola non è stata inserita in caselle conseutive né in orizzontale, né in verticale";
 
         //4. controllo che la casella centrale non sia vuota
         //controllo se ci si trova nel primo inserimento --> in questo caso la casella centrale deve obbligatoriamente essere occupata
         work = controllaCasellaCentrale(_parola, direction);
         //controllo integrità
         if(work == false)
-            return false;
+            return "La casella centrale non può essere lasciata libera";
         
         //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
         //verifica delle caselle
         work = controllaEstremi(_parola, direction);
         //controllo integrità
         if(work == false)
-            return false;
+            return "La parola deve essere prceduta e seguita da una casella vuota o parte del bordo della tabella";
 
         //6. controllo che non si esca dalla tabella
         //verifica della posizione delle varie caselle
@@ -82,16 +82,17 @@ class Tabella {
         work = controlloCasellePiene(_parola, direction);
         //controllo integrità
         if(work == false)
-            return false;
+            return "Non si possono sovrascrivere delle caselle già riempite";
 
         //7. controllo che la parola inserita sia salvata nel dizionario
         //verifica dell'esistenza della parola
         work = checkDizionario(_parola);
         //controllo integrità
         if(work == false)
-            return false;
+            return "La parola inserita non esiste";
 
-        return true;
+        //parol inserita correttamente
+        return "";
     }
 
     //3. controllo che la casella centrale della tabella sia piena
