@@ -51,21 +51,21 @@ namespace test_client_tcp
         {
             try
             {
-                byte[] lengthBytes = new byte[4];
-                stream.Read(lengthBytes, 0, 4);
-                int messageLength = BitConverter.ToInt32(lengthBytes, 0);
+                byte[] receivedBytes = new byte[1024];
+                int byteCount = stream.Read(receivedBytes, 0, receivedBytes.Length);
 
-                byte[] messageBytes = new byte[messageLength];
-                stream.Read(messageBytes, 0, messageLength);
-
-                string receivedMessage = Encoding.UTF8.GetString(messageBytes);
-                return receivedMessage;
+                if (byteCount > 0)
+                {
+                    string receivedMessage = Encoding.ASCII.GetString(receivedBytes, 0, byteCount);
+                    return receivedMessage;
+                }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Errore durante la ricezione del messaggio: " + ex.Message);
-                return null;
+                Console.WriteLine("Exception: " + e);
+                return "null";
             }
+            return "null2";
         }
 
         public void CloseConnection()

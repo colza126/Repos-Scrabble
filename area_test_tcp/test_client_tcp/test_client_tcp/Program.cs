@@ -9,10 +9,14 @@ int port = 666;
 
 ConnectionManager c1 = new ConnectionManager(ip, port);
 c1.Connect();
-c1.SendMessage("viva la figa");
+c1.SendMessage("richiedo Messaggio");
 String messaggio;
+
+
 messaggio = c1.ReceiveMessage();
 Console.WriteLine(messaggio);
+
+
 c1.CloseConnection();
 
 

@@ -24,6 +24,7 @@ public class ConnectionManager {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
         out.println("Connessione stabilita");
+        out.flush();
     }
 
     public void stop() throws IOException {
@@ -39,5 +40,6 @@ public class ConnectionManager {
     }
     public void inviaMessaggio(String messaggio) {
         out.println(messaggio);
+        out.flush();
     }
 }
