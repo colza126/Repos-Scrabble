@@ -1,4 +1,4 @@
-//cose da fare: punteggi per lettera e per casella; comunicazione punteggi, tabella e eventuali errori
+//cose da fare: gestione del file punteggi; punteggi per lettera e per casella; comunicazione punteggi
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -47,11 +47,12 @@ class server{
                 //scrittura al client del tipo di errore effettuato
                 inviaRisposta(statoInserimento);
             
+            //----------a questo punto la parola ha passato tutti i controlli, per cui lla si può inserire nella tabella e svolgere le operazioni successive----------\\
             //inserimento della parola corretta all'interno della tabella
             tab.aggiungiParola(parolaClient);
 
-            //conteggio i punti effettuati dalla giocata
-            //calcolaPuntiOttenuti(parolaClient);
+            //conteggio dei punti effettuati dalla giocata
+            //int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
         }
 
         //chiudo la socket
@@ -90,4 +91,18 @@ class server{
     {
         //implementare il metodo che comunica con il client
     }
+
+    //calcolo del punteggio ottenuto dal giocatore con l'intera giocata corrente
+    /*public static int calcolaPuntiOttenuti(Parola _parola, Tabella _tab) throws IOException
+    {
+        int punteggio = 0;
+
+        //assegnamento del moltiplicatore ad ogni casella
+        _tab.assegnaMoltiplicatori();
+
+        //scorrimento di tutte le lettere
+        for(int i=0; i < _parola.lunghezza; i++){
+            punteggio+=_parola.vettore.get(i).calcolaLettera();
+        }
+    }*/
 }

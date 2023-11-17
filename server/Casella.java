@@ -5,7 +5,7 @@ class Casella{
     int valore;             //valore corrispondente alla determinata lettera
     int x;                  //posizione (x)
     int y;                  //posizione (y)
-    int valorePosizione;    //moltiplicatore della casella (ci sono delle caselle speciali che, indipendentemente dall'andamento della partita hanno dei valori speciali)
+    String moltiplicatore;  //moltiplicatore della casella (ci sono delle caselle speciali che, indipendentemente dall'andamento della partita hanno dei valori speciali)
 
     //metodi
     //costruttore di default

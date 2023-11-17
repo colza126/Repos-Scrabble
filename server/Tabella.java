@@ -336,7 +336,78 @@ class Tabella {
         //la parola è stata inserita all'interno della tabella
     }
 
+    //assegnamento del valore del moltiplicatore ad ogni casella della tabella
+    public void assegnaMoltiplicatori(){
+        //assegnamento dei moltiplicatori ad ogni casella (inserimento manuale :( )
+        //3P
+        this.tabella[0][0].moltiplicatore="3P";
+        this.tabella[0][7].moltiplicatore="3P";
+        this.tabella[0][14].moltiplicatore="3P";
+        this.tabella[7][0].moltiplicatore="3P";
+        this.tabella[7][14].moltiplicatore="3P";
+        this.tabella[14][0].moltiplicatore="3P";
+        this.tabella[14][7].moltiplicatore="3P";
+        this.tabella[14][14].moltiplicatore="3P";
 
+        //2P
+        this.tabella[1][1].moltiplicatore="2P";
+        this.tabella[1][13].moltiplicatore="2P";
+        this.tabella[2][2].moltiplicatore="2P";
+        this.tabella[2][12].moltiplicatore="2P";
+        this.tabella[3][3].moltiplicatore="2P";
+        this.tabella[3][11].moltiplicatore="2P";
+        this.tabella[4][4].moltiplicatore="2P";
+        this.tabella[4][10].moltiplicatore="2P";
+        this.tabella[10][4].moltiplicatore="2P";
+        this.tabella[10][10].moltiplicatore="2P";
+        this.tabella[11][3].moltiplicatore="2P";
+        this.tabella[11][11].moltiplicatore="2P";
+        this.tabella[12][2].moltiplicatore="2P";
+        this.tabella[12][12].moltiplicatore="2P";
+        this.tabella[13][1].moltiplicatore="2P";
+        this.tabella[13][13].moltiplicatore="2P";
+
+        //3L
+        this.tabella[1][5].moltiplicatore="3L";
+        this.tabella[1][9].moltiplicatore="3L";
+        this.tabella[5][1].moltiplicatore="3L";
+        this.tabella[5][5].moltiplicatore="3L";
+        this.tabella[5][9].moltiplicatore="3L";
+        this.tabella[5][13].moltiplicatore="3L";
+        this.tabella[9][1].moltiplicatore="3L";
+        this.tabella[9][5].moltiplicatore="3L";
+        this.tabella[9][9].moltiplicatore="3L";
+        this.tabella[9][13].moltiplicatore="3L";
+        this.tabella[13][5].moltiplicatore="3L";
+        this.tabella[13][9].moltiplicatore="3L";
+
+
+        //2L
+        this.tabella[0][3].moltiplicatore="2L";
+        this.tabella[0][11].moltiplicatore="2L";
+        this.tabella[2][6].moltiplicatore="2L";
+        this.tabella[2][8].moltiplicatore="2L";
+        this.tabella[3][0].moltiplicatore="2L";
+        this.tabella[3][7].moltiplicatore="2L";
+        this.tabella[3][14].moltiplicatore="2L";
+        this.tabella[6][2].moltiplicatore="2L";
+        this.tabella[6][6].moltiplicatore="2L";
+        this.tabella[6][8].moltiplicatore="2L";
+        this.tabella[6][12].moltiplicatore="2L";
+        this.tabella[7][3].moltiplicatore="2L";
+        this.tabella[7][11].moltiplicatore="2L";
+        this.tabella[8][2].moltiplicatore="2L";
+        this.tabella[8][6].moltiplicatore="2L";
+        this.tabella[8][8].moltiplicatore="2L";
+        this.tabella[8][12].moltiplicatore="2L";
+        this.tabella[11][0].moltiplicatore="2L";
+        this.tabella[11][7].moltiplicatore="2L";
+        this.tabella[11][14].moltiplicatore="2L";
+        this.tabella[12][6].moltiplicatore="2L";
+        this.tabella[12][8].moltiplicatore="2L";
+        this.tabella[14][3].moltiplicatore="";
+        this.tabella[14][11].moltiplicatore="2L";
+    }
 
 
 
