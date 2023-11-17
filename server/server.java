@@ -1,4 +1,4 @@
-//cose da fare: punteggi per lettera e per casella; posizionamento parola nella tabella; comunicazione punteggi, tabella e eventuali errori
+//cose da fare: punteggi per lettera e per casella; comunicazione punteggi, tabella e eventuali errori
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -46,6 +46,12 @@ class server{
             if(statoInserimento != "")
                 //scrittura al client del tipo di errore effettuato
                 inviaRisposta(statoInserimento);
+            
+            //inserimento della parola corretta all'interno della tabella
+            tab.aggiungiParola(parolaClient);
+
+            //conteggio i punti effettuati dalla giocata
+            //calcolaPuntiOttenuti(parolaClient);
         }
 
         //chiudo la socket
@@ -70,7 +76,6 @@ class server{
         buff = new String(packet.getData(), 0, packet.getLength());
 
         //----------il messaggio del client è salvato in buff con il seguente formato: "3/C,1,1;I,1,2;A,1,3;o,1,4" (numero caratteri/lettera, x, y/ ... altre lettere ...)----------\
-        
         
         //restituzione della stringa ottenuta
         return buff;

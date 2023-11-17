@@ -324,38 +324,20 @@ class Tabella {
         //return false--> parola non inserita correttamente (non sensata)
     }
 
+    //inserimento delle lettere all'interno della tabella 
+    public void aggiungiParola(Parola _parola){
+        //----------a questo punto parola è sicuramente corretta per cui viene inserita nella tabella----------\\
 
+        //scorrimento di tutte le lettere
+        for(int i=0; i < _parola.lunghezza; i++)
+            //inserimento di ogni lettera nella posizione corretta della casella
+            this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera = _parola.vettore.get(i).contenuto;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // metodo che assegna il valore ad ogni casella della tabella (valore relativo al moltiplicatore di ogni singola casella)
-    public void assegnaValori() {
-        //variabile d'appoggio
-        //int moltiplicatore = 1;
-
-        //scorrimento righe
-        /*for (int row = 0; row <= 14; row++) {
-            for (int col = 0; col <= 14; col++) {
-                if (x == 8 && y == 8)
-                if (y == row || x == col)
-                    Moltiplicatore = 3;
-            }
-        }
-        if (x == y) {
-            Moltiplicatore = 2;
-        }*/
+        //la parola è stata inserita all'interno della tabella
     }
+
+
+
+
+
 }
