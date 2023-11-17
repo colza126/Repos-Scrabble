@@ -4,19 +4,20 @@ using test_client_tcp;
 
 Console.WriteLine("Sto partendo!");
 
-String ip = "127.0.0.1";
+String ip = "127.0.0.2";
 int port = 666;
 
-connectionManager c1 = new connectionManager(ip, port);
+ConnectionManager c1 = new ConnectionManager(ip, port);
 c1.Connect();
-c1.SendMessage("viva la figa");
-String messaggio = "";
-while (messaggio == "")
-{
-    messaggio = c1.ReceiveMessage();
-    Console.WriteLine(messaggio);
+c1.SendMessage("richiedo Messaggio");
+String messaggio;
 
-}
+
+messaggio = c1.ReceiveMessage();
+Console.WriteLine(messaggio);
+
+
+c1.CloseConnection();
 
 
 Console.WriteLine("Sto finendo!");

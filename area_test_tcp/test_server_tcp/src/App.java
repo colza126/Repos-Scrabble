@@ -1,12 +1,11 @@
 public class App {
     public static void main(String[] args) throws Exception {
         int porta = 666;
-        String ip = "127.0.0.1";
 
-        ConnectionManager c = new ConnectionManager(porta, ip);
+        ConnectionManager c = new ConnectionManager();
 
-        c.initializeServer();
-        c.receiveMessage();
-        c.inviaMessaggio("salve");
+        c.start(porta);
+        System.out.println(c.ricevi());    
+        c.inviaMessaggio("e chi la castiga!");
     }
 }
