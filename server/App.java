@@ -1,4 +1,4 @@
-//toString della tabella, restituzione lettere necessarie, assegnamento punti ai vari giocatori, vittoria
+//toString della tabella, restituzione lettere necessarie, assegnamento punti ai vari giocatori, vittoria, return tabella e punti
 import java.io.IOException;
 
 public class App {
