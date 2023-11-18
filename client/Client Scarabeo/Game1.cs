@@ -1,5 +1,6 @@
 using Client_Scarabeo;
 using Client_Scarabeo._Managers;
+using Microsoft.Xna.Framework.Graphics;
 using test_client_tcp;
 
 namespace ClientScarabeo;
@@ -10,7 +11,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
     private ConnectionManager connectionManager;
-    private String s = Messaggio.stringa_messaggio;
+
 
     public Game1()
     {
@@ -42,7 +43,7 @@ public class Game1 : Game
         } 
         */
 
-        String[] Letters = ["a", "b", "b", "a","a"];
+        String[] Letters = ["a", "b", "b", "a","c"];
         Coordinate[] cords = [new (1,1), new(1, 2), new(1, 3), new(1, 4)];
         _graphics.PreferredBackBufferWidth = 735;
         _graphics.PreferredBackBufferHeight = 853;
@@ -68,6 +69,7 @@ public class Game1 : Game
         Globals.Update(gameTime);
         _gameManager.Update();
 
+
         base.Update(gameTime);
     }
 
@@ -77,7 +79,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         _spriteBatch.Draw(Globals.Content.Load<Texture2D>("printable-scrabble-board_326273-3013729147"),new Vector2(0,0),Color.White);
-        
+        _spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
         _gameManager.Draw();
         _spriteBatch.End();
 

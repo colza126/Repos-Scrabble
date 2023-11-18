@@ -1,4 +1,6 @@
 using Client_Scarabeo;
+using Client_Scarabeo._Managers;
+using System.Linq;
 
 namespace ClientScarabeo;
 
@@ -13,6 +15,7 @@ public static class DragDropManager
     //item attualmente draggato
     private static IDraggable _dragItem;
     public static int indexItem;
+    public static string messaggio = "";
 
     //aggiungi alla lista gli item prendibli
     public static void AddDraggable(IDraggable item, String let)
@@ -67,10 +70,9 @@ public static class DragDropManager
                 //metti l'item nella stessa posizione
                 _dragItem.Position = item.Position;
 
-                //da aggiungere output con x,y e lettera
-                _cord_targ.ElementAt(i);
-                _cord_targ.ElementAt(i);
 
+                messaggio += letters.ElementAt(indexItem)+";";
+                messaggio += _cord_targ.ElementAt(i).x + ";" + _cord_targ.ElementAt(i).y + ";";
                 _draggables.RemoveAt(indexItem);
                 _targets.RemoveAt(i);
                 break;
