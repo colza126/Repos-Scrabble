@@ -16,7 +16,7 @@ public class Parola {
     }
     //costruttore parametrico 
     public Parola(String _stringa){
-        //----------_lettere contiene una stringa in questo formato "4;s,1,1;i,1,2;u,1,3;m,1,4"----------\\
+        //----------_lettere contiene una stringa in questo formato "4/s,1,1;i,1,2;u,1,3;m,1,4"----------\\
 
         //lunghezza
         this.lunghezza= Integer.parseInt(_stringa.split("/")[0]);

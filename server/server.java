@@ -12,6 +12,10 @@ public class server {
     private PrintWriter out;
     private BufferedReader in;
 
+    public server() {
+
+    }
+
     //attesa di una connessione con il client
     public void start(int port) throws IOException {
         //creazione oggetto che attende la connessione con un client
