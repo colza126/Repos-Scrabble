@@ -418,4 +418,15 @@ class Tabella {
         return contatore;
     }
 
+    public String tabellaInStringa(){
+        String output = "";
+        for (int i = 0; i < tabella.length; i++) {
+            for (int j = 0; j < tabella.length; j++) {
+                if(tabella[i][j].lettera != ' '){
+                    output+= tabella[i][j].lettera+";"+tabella[i][j].x+";"+tabella[i][j].y+";";
+                }
+            }
+        }
+        return output;
+    }
 }

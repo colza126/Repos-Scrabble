@@ -12,7 +12,7 @@ public class GameManager
 
 
 
-    public GameManager(String[] lettereLista, Coordinate[] posizioni)
+    public GameManager(List<string> lettereLista, List<Coordinate> posizioni)
     {
         //aggiungi i bottoni
         _ui.AddButton(new(250+384, 800-24));
@@ -27,9 +27,9 @@ public class GameManager
             for (int j = 1; j <= 15; j++)
             {
                 Boolean targettable = true;
-                for (int k = 0; k < posizioni.Length;k++)
+                for (int k = 0; k < posizioni.Count;k++)
                 {
-                    if (j == posizioni[k].x && i == posizioni[k].y)
+                    if (j == posizioni.ElementAt(k).x && i == posizioni.ElementAt(k).y)
                     {
                         targettable = false;
                     }
@@ -41,14 +41,14 @@ public class GameManager
             }
         }
         //per il numero di lettere presenti nella lista
-        for (int i = 0; i < lettereLista.Length; i++)
+        for (int i = 0; i < lettereLista.Count; i++)
         {
             //inizializza ogni lettere che serve (presa dalla lettera lista)
             var lettere = Globals.Content.Load<Texture2D>(lettereLista[i]);
 
             //se e' specificata una posizione significa che
             //e' una lettere gia posizionata
-            if (posizioni.Length-1 > i)
+            if (posizioni.Count-1 > i)
             {
                 letters.Add(new(lettere, new(posizioni[i].x * 48 - 21, posizioni[i].y * 48 - 21), lettereLista[i], false)) ;
 

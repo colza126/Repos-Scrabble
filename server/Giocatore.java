@@ -5,14 +5,15 @@ public class Giocatore {
 
     //attributi
     public String nome;
+    public int id;
     public char[] lettereDisponibili;
     public int punteggio;
 
     //metodi
     //costruttore di default
-    public Giocatore(String _nome){
+    public Giocatore(String _nome,int id){
         this.nome=_nome;
-        
+        this.id = id;
         //numero di lettere che ha a disposizione ogni giocatore
         int lettereOgniGiocatore = 8;
 
@@ -32,11 +33,11 @@ public class Giocatore {
         Random random = new Random();
 
         //generazione di un intero casuale a 32 bit 
-        int randomNumber = random.nextInt(25) + 65; 
+        int randomNumber = random.nextInt(25) + 97; 
         //controllo dei casi limite (numeri non validi)
-        while(randomNumber == 65 || randomNumber == 69 || randomNumber == 73 || randomNumber == 79 ||  randomNumber == 85)
+        while(randomNumber == 97 || randomNumber == 101 || randomNumber == 105 || randomNumber == 111 ||  randomNumber == 117)
             //generazione di un intero casuale a 32 bit 
-            randomNumber = random.nextInt(25) + 65; 
+            randomNumber = random.nextInt(25) + 97; 
         
         //restituzione della lettera generata casualmente
         return (char)randomNumber;
@@ -48,11 +49,11 @@ public class Giocatore {
         Random random = new Random();
 
         //generazione di un intero casuale a 32 bit
-        int randomNumber = random.nextInt(25) + 65; 
+        int randomNumber = random.nextInt(25) + 97; 
         //controllo dei casi limite (numeri non validi)
-        while(!(randomNumber == 65 || randomNumber == 69 || randomNumber == 73 || randomNumber == 79 ||  randomNumber == 85))
+        while(!(randomNumber == 97 || randomNumber == 101 || randomNumber == 105 || randomNumber == 111 ||  randomNumber == 117))
             //generazione di un intero casuale a 32 bit
-            randomNumber = random.nextInt(25) + 65; // Generates a random 32-bit signed integer
+            randomNumber = random.nextInt(25) + 97; // Generates a random 32-bit signed integer
         
         //restituzione della lettera generata casualmente
         return (char)randomNumber;
@@ -75,8 +76,16 @@ public class Giocatore {
                     lettereDisponibili[i] = randomConsonante();
 
                 //output delle lettere generate
-                System.out.println(lettereDisponibili[i]);
+                //System.out.println(lettereDisponibili[i]);
             }
         }
+    }
+
+    public String valoreLettere(){
+        String tmp = "";
+        for (int i = 0; i < lettereDisponibili.length; i++) {
+            tmp += lettereDisponibili[i]+";";
+        }
+        return tmp;
     }
 }

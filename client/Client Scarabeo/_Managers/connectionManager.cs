@@ -24,7 +24,6 @@ namespace test_client_tcp
             {
                 tcpClient = new TcpClient(serverIp, serverPort);
                 stream = tcpClient.GetStream();
-                Console.WriteLine("Connesso");
             }
             catch (Exception ex)
             {
@@ -59,7 +58,7 @@ namespace test_client_tcp
             while(true) {
                 try
                 {
-                    byte[] receivedBytes = new byte[2048];
+                    byte[] receivedBytes = new byte[4096];
                     int byteCount = stream.Read(receivedBytes, 0, receivedBytes.Length);
 
                     if (byteCount > 0)

@@ -12,4 +12,15 @@ public class GestioneGiocatori {
         //costruzione vettore
         this.vettore = new ArrayList<Giocatore>();
     }
+    public void aggiungiGiocatore(Giocatore g){
+        vettore.add(g);
+    }
+    public Giocatore cercaGiocatore(int id){
+        for (int i = 0; i < vettore.size(); i++) {
+            if(vettore.get(i).id == id){
+                return vettore.get(i);
+            }
+        }
+        return null;
+    }
 }

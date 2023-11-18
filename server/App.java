@@ -19,59 +19,78 @@ public class App {
         //attesa di un client per la comunicazione
         server.start(porta);
         //ricezione del messaggio
-        input = server.ricevi();
+        int numeroGiocatori = 0;
+        while (true) {
+            
+        
+            input = server.ricevi();
 
-        //----------a questo punto input può contenere due informazioni diverse: numero di giocatori o parola inserita----------\\
-        //1. input iniziale, comunicazione del numero di giocatori nella partita --> formato: n%4
-        //controllo sull'input
-        if(input.split("%")[0].charAt(0) == 'n'){
-            //i giocatori possono essere 2 o 4
-            //giocatore 1
-            Giocatore g1=new Giocatore("player1");
-            //giocatore 2
-            Giocatore g2=new Giocatore("player2");
+            //----------a questo punto input può contenere due informazioni diverse: numero di giocatori o parola inserita----------\\
+            //1. input iniziale, comunicazione del numero di giocatori nella partita --> formato: n%4
+            //controllo sull'input
+            /*
+            if(input.split("%")[0].charAt(0) == 'n'){
+                //i giocatori possono essere 2 o 4
+                //giocatore 1
+                Giocatore g1 = new Giocatore("player1");
+                //giocatore 2
+                Giocatore g2 = new Giocatore("player2");
 
-            //controllo quanti devono essere i giocatori
-            if(input.split(";")[0].charAt(0) == '4'){
-                //giocatore 3
-                Giocatore g3=new Giocatore("player3");
-                //giocatore 4
-                Giocatore g4=new Giocatore("player4");
+                //controllo quanti devono essere i giocatori
+                if(input.split(";")[0].charAt(0) == '4'){
+                    //giocatore 3
+                    Giocatore g3 = new Giocatore("player3");
+                    //giocatore 4
+                    Giocatore g4 = new Giocatore("player4");
+                }
+
+            } */
+            //risposta dell'avvenuto inserimento del numero di giocatori
+            if(input.equals("Nuovo Giocatore")){
+                String nomegiocatore = "";
+                numeroGiocatori++;
+                nomegiocatore ="giocatore numero: " + listaGiocatori.vettore.size()+1; 
+                listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()+1));
+                listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
+                System.out.println(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere());
+                server.inviaMessaggio(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+            }else if(numeroGiocatori >= 2){
+                //procedi con il gioco
+
+                //a questo punto la partita è iniziata e si devono gestire le azioni dei giocatori
+                //2. inserimento di una parola --> formato: p1%4/s,1,1;i,1,2;u,1,3;m,1,4 (nome giocatore%lunghezza parola/lettera,x,y;altre lettere ... )
+                //controllo sull'input
+                if(input.split("%")[0].charAt(0) == 'p'){
+                    //creazione di una parola (la stringa precedente viene convertita in un oggetto)
+                    Parola parolaClient = new Parola(input.split("%")[1]);
+
+                    //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
+                    
+                    //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
+                    String statoInserimento = tab.controlloMaster(parolaClient);
+
+                    //controllo se è stato passato un messaggio d'errore
+                    if(statoInserimento != "")
+                        //scrittura al client del tipo di errore effettuato
+                        server.inviaMessaggio(statoInserimento);
+                    
+                    //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
+                    //inserimento della parola corretta all'interno della tabella
+                    tab.aggiungiParola(parolaClient);
+
+                    //conteggio dei punti effettuati dalla giocata
+                    int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
+
+                    //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
+                }
             }
 
-        }
-        //risposta dell'avvenuto inserimento del numero di giocatori
-        server.inviaMessaggio("fatto");
-
-        //a questo punto la partita è iniziata e si devono gestire le azioni dei giocatori
-        //2. inserimento di una parola --> formato: p1%4/s,1,1;i,1,2;u,1,3;m,1,4 (nome giocatore%lunghezza parola/lettera,x,y;altre lettere ... )
-        //controllo sull'input
-        if(input.split("%")[0].charAt(0) == 'p'){
-            //creazione di una parola (la stringa precedente viene convertita in un oggetto)
-            Parola parolaClient = new Parola(input.split("%")[1]);
-
-            //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
-
-            //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-            String statoInserimento = tab.controlloMaster(parolaClient);
-
-            //controllo se è stato passato un messaggio d'errore
-            if(statoInserimento != "")
-                //scrittura al client del tipo di errore effettuato
-                server.inviaMessaggio(statoInserimento);
             
-            //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
-            //inserimento della parola corretta all'interno della tabella
-            tab.aggiungiParola(parolaClient);
 
-            //conteggio dei punti effettuati dalla giocata
-            int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
-
-            //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
+            
         }
-
         //chiusura ddel canale di comunicazione
-        server.stop();         
+        //server.stop();         
     }
 
     //calcolo del punteggio ottenuto dal giocatore con l'intera giocata corrente
@@ -116,6 +135,7 @@ public class App {
     }
 
     //ricezione del messaggio dal client
+    /* 
     public static String attendiParola(GestioneGiocatori giocatori) throws IOException
     {
         //variabile d'appoggio
@@ -142,5 +162,5 @@ public class App {
         //restituzione del messaggio letto
         return tmp;
         
-    }
+    }*/
 }

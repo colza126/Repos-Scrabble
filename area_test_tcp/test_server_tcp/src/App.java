@@ -3,11 +3,14 @@ public class App {
         int porta = 666;
 
         ConnectionManager c = new ConnectionManager();
+            while (true) {
+            c.start(porta);
 
-        c.start(porta);
-
-        System.out.println(c.ricevi());
-        c.inviaMessaggio("Ciao client finalmente ci conosciamo");
-        c.stop();
+            String messaggio = c.ricevi();
+            String[] valori = messaggio.split(";");
+            c.inviaMessaggio("Ciao client finalmente ci conosciamo "+ valori);
+            c.stop();
+            
+        }
     }
 }

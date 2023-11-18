@@ -11,7 +11,25 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
     private ConnectionManager connectionManager;
+    private String nomeGiocatore;
 
+    static bool IsLettera(string carattere)
+    {
+        // Assicurati che la stringa contenga esattamente un carattere
+        if (carattere.Length == 1)
+        {
+            char charValue = carattere[0];
+
+            // Verifica se il carattere è una lettera (sia maiuscola che minuscola)
+            if ((charValue >= 'A' && charValue <= 'Z') || (charValue >= 'a' && charValue <= 'z'))
+            {
+                return true;
+            }
+        }
+
+        // Se non è una lettera, o la stringa contiene più di un carattere, restituisci false
+        return false;
+    }
 
     public Game1()
     {
@@ -23,34 +41,46 @@ public class Game1 : Game
 
     protected override void Initialize()
     {
-        /*
         //set up della connesione 
         int port = 666;
         String ip = "127.0.0.1";
         connectionManager = new(ip, port);
         //connessione
         connectionManager.Connect();
+        connectionManager.SendMessage("Nuovo Giocatore\n");
+
 
         //prendo valori e lettere
         String[] valori = connectionManager.ReceiveMessage().Split(";");
-        String[] letters = {};
-        int j = 0;
-        //riempio l'array lettere di valori in modo da aggiornalo
-        for (int i = letters.Length; i < 8; i++)
-        {
-            letters[i] = valori[j].Trim();
-            j++;
-        } 
-        */
 
-        String[] Letters = ["a", "b", "b", "a","c"];
-        Coordinate[] cords = [new (1,1), new(1, 2), new(1, 3), new(1, 4)];
+        List<string> letters = new List<string>();
+        List<Coordinate> cords = new List<Coordinate>();
+        nomeGiocatore = valori[0];
+        int j = 1;
+        //riempio l'array lettere di valori in modo da aggiornalo
+        int lunghezzaAttuale = letters.Count;
+        for (int i = 0; i < 8- lunghezzaAttuale && valori[j] != null; i++)
+        {
+            if (IsLettera(valori[j]))
+            {
+                letters.Add(valori[j]);
+                j++;
+            }
+            else
+            {
+                cords.Add(new(int.Parse(valori[j]), int.Parse(valori[j + 1])));
+                j += 2;
+            }
+            
+            
+        } 
+      
         _graphics.PreferredBackBufferWidth = 735;
         _graphics.PreferredBackBufferHeight = 853;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
-        _gameManager = new(Letters, cords);
+        _gameManager = new(letters, cords);
 
         base.Initialize();
     }
