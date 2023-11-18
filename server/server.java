@@ -1,4 +1,4 @@
-//cose da fare: comunicazione punteggi
+//cose da fare: comunicazione client server, gestione giocatori e turni
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -124,7 +124,7 @@ class server{
             giocatori.vettore.add(giocatore);
 
             //inserimento giocatore avvenuto
-            inviaRisposta(giocatore.toString());
+            inviaRisposta(giocatore.restituisciLettere());
             //uscita dal metodo
             return "";
         }
