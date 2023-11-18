@@ -1,4 +1,6 @@
+using Client_Scarabeo;
 using Client_Scarabeo._Managers;
+using test_client_tcp;
 
 namespace ClientScarabeo;
 
@@ -7,7 +9,7 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
-    private connectionManager connectionManager;
+    private ConnectionManager connectionManager;
     private String s = Messaggio.stringa_messaggio;
 
     public Game1()
@@ -22,10 +24,10 @@ public class Game1 : Game
     {
         /*
         //set up della connesione 
-        String ip = "127.0.0.1";
         int port = 666;
+        String ip = "127.0.0.1";
         connectionManager = new(ip, port);
-        //handshake
+        //connessione
         connectionManager.Connect();
 
         //prendo valori e lettere
@@ -37,15 +39,17 @@ public class Game1 : Game
         {
             letters[i] = valori[j].Trim();
             j++;
-        }*/
+        } 
+        */
 
+        String[] Letters = ["a", "b", "b", "a","a"];
+        Coordinate[] cords = [new (1,1), new(1, 2), new(1, 3), new(1, 4)];
         _graphics.PreferredBackBufferWidth = 735;
         _graphics.PreferredBackBufferHeight = 853;
         _graphics.ApplyChanges();
 
         Globals.Content = Content;
-        String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h" };
-        _gameManager = new(letters);
+        _gameManager = new(Letters, cords);
 
         base.Initialize();
     }

@@ -1,3 +1,4 @@
+using Client_Scarabeo;
 using Client_Scarabeo._Managers;
 
 namespace ClientScarabeo;
@@ -11,7 +12,7 @@ public class GameManager
 
 
 
-    public GameManager(String[] lettereLista)
+    public GameManager(String[] lettereLista, Coordinate[] posizioni)
     {
 
         _ui.AddButton(new(250+384, 800-24));
@@ -25,11 +26,22 @@ public class GameManager
                 casels.Add(new(casella, new(21 + ((j - 1) * 49), 21 + ((i - 1) * 50)),new(j,i)));
             }
         }
+
         for (int i = 0; i < lettereLista.Length; i++)
         {
             var lettere = Globals.Content.Load<Texture2D>(lettereLista[i]);
 
-            letters.Add(new(lettere, new(200 + (i * 48), 800), lettereLista[i]));
+
+            if (posizioni.Length-1 > i)
+            {
+                letters.Add(new(lettere, new(posizioni[i].x * 48 - 21, posizioni[i].y * 48 - 21), lettereLista[i]));
+
+            }
+            else
+            {
+
+                letters.Add(new(lettere, new(200 + (i * 48), 800), lettereLista[i]));
+            }
 
         }
     }

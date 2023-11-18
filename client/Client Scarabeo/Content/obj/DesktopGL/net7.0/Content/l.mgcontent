@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/l.png</SourceFile>
-  <SourceTime>2023-11-13T11:52:26.9775863+01:00</SourceTime>
+  <SourceTime>2023-11-18T10:15:27.0482937+01:00</SourceTime>
   <DestFile>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client/Client Scarabeo/Content/bin/DesktopGL/Content/l.xnb</DestFile>
-  <DestTime>2023-11-13T12:53:19.5598132+01:00</DestTime>
+  <DestTime>2023-11-18T11:13:33.9658788+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
