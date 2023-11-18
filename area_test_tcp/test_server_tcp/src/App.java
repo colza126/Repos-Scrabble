@@ -5,7 +5,9 @@ public class App {
         ConnectionManager c = new ConnectionManager();
 
         c.start(porta);
-        System.out.println(c.ricevi());    
-        c.inviaMessaggio("e chi la castiga!");
+
+        System.out.println(c.ricevi());
+        c.inviaMessaggio("Ciao client finalmente ci conosciamo");
+        c.stop();
     }
 }
