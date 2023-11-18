@@ -4,10 +4,18 @@ public class Lettera : Sprite, IDraggable
 {
     public String lettera;
 
-    public Lettera(Texture2D tex, Vector2 pos, string lettera) : base(tex, pos)
+    public Lettera(Texture2D tex, Vector2 pos, string lettera, Boolean draggable) : base(tex, pos)
     {
-        this.lettera = lettera;
-        (this as IDraggable).RegisterDraggable(lettera);
+        if (draggable)
+        {
+            this.lettera = lettera;
+            (this as IDraggable).RegisterDraggable(lettera);
+
+        }
+        else
+        {
+
+        }
 
     }
 }
