@@ -73,15 +73,18 @@ public class App {
                     if(statoInserimento != "")
                         //scrittura al client del tipo di errore effettuato
                         server.inviaMessaggio(statoInserimento);
-                    
-                    //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
-                    //inserimento della parola corretta all'interno della tabella
-                    tab.aggiungiParola(parolaClient);
+                    else{
+                        //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
+                        //inserimento della parola corretta all'interno della tabella
+                        tab.aggiungiParola(parolaClient);
+    
+                        //conteggio dei punti effettuati dalla giocata
+                        int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
+    
+                        //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
+                        server.inviaMessaggio(statoInserimento);
 
-                    //conteggio dei punti effettuati dalla giocata
-                    int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
-
-                    //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
+                    }
                 }
             }
 

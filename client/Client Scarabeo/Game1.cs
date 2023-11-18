@@ -11,7 +11,7 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
     private ConnectionManager connectionManager;
-    private String nomeGiocatore;
+    private static String nomeGiocatore;
 
     static bool IsLettera(string carattere)
     {
@@ -56,6 +56,7 @@ public class Game1 : Game
         List<string> letters = new List<string>();
         List<Coordinate> cords = new List<Coordinate>();
         nomeGiocatore = valori[0];
+        DragDropManager.messaggio += nomeGiocatore+"%";
         int j = 1;
         //riempio l'array lettere di valori in modo da aggiornalo
         int lunghezzaAttuale = letters.Count;
@@ -109,7 +110,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         _spriteBatch.Draw(Globals.Content.Load<Texture2D>("printable-scrabble-board_326273-3013729147"),new Vector2(0,0),Color.White);
-        _spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
+        //_spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
         _gameManager.Draw();
         _spriteBatch.End();
 

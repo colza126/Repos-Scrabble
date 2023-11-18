@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using test_client_tcp;
 
 namespace Client_Scarabeo._Models
 {
@@ -21,14 +22,14 @@ namespace Client_Scarabeo._Models
             _rect = new((int)p.X, (int)p.Y, t.Width, t.Height);
         }
 
-        public void Update()
+        public void Update(ConnectionManager c)
         {
             if (Globals.MouseCursor.Intersects(_rect))
             {
                 _shade = Color.DarkGray;
                 if (Globals.Clicked)
                 {
-                    Click();
+                    Click(c);
                 }
             }
             else
@@ -39,9 +40,10 @@ namespace Client_Scarabeo._Models
 
         public event EventHandler OnClick;
 
-        private void Click()
+        private void Click(ConnectionManager c)
         {
             OnClick?.Invoke(this, EventArgs.Empty);
+            c.SendMessage(DragDropManager.messaggio);
         }
 
         public void Draw()
