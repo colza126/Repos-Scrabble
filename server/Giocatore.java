@@ -1,28 +1,29 @@
 import java.util.Random;
 
 //classe che gestisce i giocatori
-public class Player {
-
+public class Giocatore {
 
     //attributi
     public String nome;
-    public char[] lettere;
+    public char[] lettereDisponibili;
     public int punteggio;
 
     //metodi
     //costruttore di default
-    public Player(){
+    public Giocatore(String _nome){
+        this.nome=_nome;
+        
         //numero di lettere che ha a disposizione ogni giocatore
         int lettereOgniGiocatore = 8;
 
         //punteggio iniziale
         punteggio = 0;
         //inizializzazione del vettore di lettere
-        lettere = new char[lettereOgniGiocatore]; 
+        lettereDisponibili = new char[lettereOgniGiocatore]; 
         //scorrimento del vettore di lettere
         for (int i = 0; i < lettereOgniGiocatore; i++) 
             //inizializzazione di ogni lettera
-            lettere[i] = 0;
+            lettereDisponibili[i] = 0;
     }
 
     //generazione di una consonante casuale
@@ -60,21 +61,21 @@ public class Player {
     //assegnamento delle lettere all'interno del vettore
     public void assegnaLettere(){
         //scorrimento di tutte le lettere del vettore
-        for (int i = 0; i < lettere.length; i++) {
+        for (int i = 0; i < lettereDisponibili.length; i++) {
 
             //controllo se alla posizione corrente non è stata assegnata la lettera
-            if(lettere[i] == 0){
+            if(lettereDisponibili[i] == 0){
                 //se la posizione corrente è pari (casella 8/ casella 22 ecc.)
                 if(i % 2 == 0)
                     //assegnamento di una vocale alla posizione corrente
-                    lettere[i] = randomVocale();
+                    lettereDisponibili[i] = randomVocale();
                 //se la posizione corrente è dispari (casella 1/ casella 13 ecc.)
                 else
                     //assegnamento di una consonante alla posizione corrente
-                    lettere[i] = randomConsonante();
+                    lettereDisponibili[i] = randomConsonante();
 
                 //output delle lettere generate
-                System.out.println(lettere[i]);
+                System.out.println(lettereDisponibili[i]);
             }
         }
     }

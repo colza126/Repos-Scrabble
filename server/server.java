@@ -15,6 +15,9 @@ class server{
 
     //main
     public static void main(String[] args) throws IOException{
+        //giocatori
+        GestioneGiocatori listaGiocatori = new GestioneGiocatori();
+
         //variabili
         //booleano che identifica lo status della comunicazione
         boolean running = true;
@@ -31,65 +34,34 @@ class server{
         while(running)
         {
             //lettura della richiesta del client e salvataggio in apposita variabile
-            parola = attendiParola(socket);
+            parola = attendiParola(socket, listaGiocatori);
 
             //----------a questo punto parola contiene una stringa nel seguente formato "lunghezza/lettera,x,y; altre lettere..."----------\\
 
-            //creazione di una parola (la stringa precedente viene convertita in un oggetto)
-            Parola parolaClient = new Parola(parola);
+            if(parola != ""){
+                //creazione di una parola (la stringa precedente viene convertita in un oggetto)
+                Parola parolaClient = new Parola(parola);
 
-            //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
-            //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-            String statoInserimento = tab.controlloMaster(parolaClient);
+                //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
+                //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
+                String statoInserimento = tab.controlloMaster(parolaClient);
 
-            //controllo se è stato passato un messaggio d'errore
-            if(statoInserimento != "")
-                //scrittura al client del tipo di errore effettuato
-                inviaRisposta(statoInserimento);
-            
-            //----------a questo punto la parola ha passato tutti i controlli, per cui lla si può inserire nella tabella e svolgere le operazioni successive----------\\
-            //inserimento della parola corretta all'interno della tabella
-            tab.aggiungiParola(parolaClient);
+                //controllo se è stato passato un messaggio d'errore
+                if(statoInserimento != "")
+                    //scrittura al client del tipo di errore effettuato
+                    inviaRisposta(statoInserimento);
+                
+                //----------a questo punto la parola ha passato tutti i controlli, per cui lla si può inserire nella tabella e svolgere le operazioni successive----------\\
+                //inserimento della parola corretta all'interno della tabella
+                tab.aggiungiParola(parolaClient);
 
-            //conteggio dei punti effettuati dalla giocata
-            int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
+                //conteggio dei punti effettuati dalla giocata
+                int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
+            }
         }
 
         //chiudo la socket
         socket.close();
-    }
-
-    /**
-     * metodo per aspettare la richiesta del client
-     * @param socket socket da cui prendere la richiesta del client
-     * @return String contenente la richiesta del client
-     * @throws IOException
-     */
-    public static String attendiParola(DatagramSocket socket) throws IOException
-    {
-        //stringa in cui verrà immagazzinato il messaggio
-        String buff = "";
-
-        //ricezione del messaggio
-        socket.receive(packet);
-
-        //salvataggio del messaggio del client in apposita variabile
-        buff = new String(packet.getData(), 0, packet.getLength());
-
-        //----------il messaggio del client è salvato in buff con il seguente formato: "3/C,1,1;I,1,2;A,1,3;o,1,4" (numero caratteri/lettera, x, y/ ... altre lettere ...)----------\
-        
-        //restituzione della stringa ottenuta
-        return buff;
-    }
-
-    /**
-     * metodo per inviare la risposta al client
-     * @param risposta String contenente la risposta da inviare al client
-     * @throws IOException
-     */
-    public static void inviaRisposta(String risposta) throws IOException
-    {
-        //implementare il metodo che comunica con il client
     }
 
     //calcolo del punteggio ottenuto dal giocatore con l'intera giocata corrente
@@ -131,5 +103,40 @@ class server{
 
         //restituzione del punteggio ottenuto con la mossa dell'utente
         return punteggio;
+    }
+
+    //ricezione del messaggio dal client
+    public static String attendiParola(DatagramSocket socket, GestioneGiocatori giocatori) throws IOException
+    {
+        //variabile d'appoggio
+        String tmp="";
+
+        //----------implementare la ricezione del messaggio del client----------\\
+
+        //----------il messaggio ppuò essere di due tipi: ingresso in partita / esecuzione mossa----------\\
+        //controllo se il messaggio è un richiesta di ingresso in partita
+        if(tmp.split(";")[0].charAt(0) == 'i'){       //la frase del client è "i;nome"
+            //creazione del nuovo giocatore 
+            Giocatore giocatore = new Giocatore(tmp.split(";")[1]);
+            //assegnamento delle lettere a disposizione
+            giocatore.assegnaLettere();
+            //aggiunta all'interno della lista
+            giocatori.vettore.add(giocatore);
+
+            //inserimento giocatore avvenuto
+            inviaRisposta(giocatore.toString());
+            //uscita dal metodo
+            return "";
+        }
+
+        //restituzione del messaggio letto
+        return tmp;
+    }
+
+    //invio di un messaggio al client
+    public static void inviaRisposta(String risposta) throws IOException
+    {
+        //----------implementare il metodo che comunica con il client----------\\
+
     }
 }
