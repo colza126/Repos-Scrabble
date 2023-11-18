@@ -68,6 +68,10 @@ public class GameManager
         DragDropManager.Update();
         _ui.Update();
     }
+    public string aggiornaMessaggio()
+    {
+        return DragDropManager.messaggio;
+    }
 
     public void Draw()
     {
