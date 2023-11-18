@@ -1,9 +1,9 @@
 //gestione di tutte le lettere di una parola (ogni lettera è caratterizzata dalla x e la y all'interno della tabella oltre al char)
 public class Lettera {
     //attributi
-    char contenuto;
-    int x;
-    int y;
+    public char contenuto;
+    public int x;
+    public int y;
 
     //metodi
     //costruttore di default

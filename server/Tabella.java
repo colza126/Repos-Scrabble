@@ -11,7 +11,7 @@ class Tabella {
     //casella centrale (sia in verticale che in orizzontale)
     public final static int CASELLA_CENTRALE = 7;
     //matrice di caselle
-    Casella[][] tabella = new Casella[NUM_CASELLE][NUM_CASELLE];
+    public Casella[][] tabella = new Casella[NUM_CASELLE][NUM_CASELLE];
 
     //metodi
     //costruttore di default
@@ -23,13 +23,6 @@ class Tabella {
     public Tabella(Casella[][] _tabella) {
         this.tabella = _tabella;
     }
-
-    /*public boolean controlloLibera(int x,int y,char lettera){
-        if(tabella[x][y] == null || tabella[x][y].lettera == lettera){
-            return true;
-        }
-        return false;
-    }*/
 
     //metodo nel quale si richiamano tutti i controlli
     public String controlloMaster(Parola _parola){
@@ -129,7 +122,6 @@ class Tabella {
         }
     }
     
-
     //4. controllo che la casella centrale della tabella sia piena
     public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
         //variabile di lavoro
@@ -292,7 +284,7 @@ class Tabella {
 
         //scorrimento di tutto il dizionario e confronta della parola inserita con quelle del dizionario stesso
 
-        //gstione errori
+        //gestione errori
         try {
             //percorso del file dizionario
             File file = new File("parole.txt");
@@ -409,6 +401,21 @@ class Tabella {
         this.tabella[14][11].moltiplicatore="2L";
     }
 
+    //calcolo del numero di moltiplicatori di parola
+    public int contaMoltiplicatoriParola(Parola _parola, String xP ){
+        //variabile d'appoggio
+        int contatore = 0;
 
+        //scorrimento di tutta la parola
+        for(int i=0; i<_parola.lunghezza;i++){
+            //controllo se c'è un il moltiplicatore di parola cercato nelle casella in cui è inserita ogni singola lettera
+            if(this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].moltiplicatore == xP)
+                //incremento del numero di contatori
+                contatore++;
+        }
+
+        //restituzione del numero di moltiplicatori di parola cercati
+        return contatore;
+    }
 
 }

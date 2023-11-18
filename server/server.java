@@ -1,4 +1,4 @@
-//cose da fare: gestione del file punteggi; punteggi per lettera e per casella; comunicazione punteggi
+//cose da fare: comunicazione punteggi
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -52,7 +52,7 @@ class server{
             tab.aggiungiParola(parolaClient);
 
             //conteggio dei punti effettuati dalla giocata
-            //int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
+            int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
         }
 
         //chiudo la socket
@@ -93,16 +93,43 @@ class server{
     }
 
     //calcolo del punteggio ottenuto dal giocatore con l'intera giocata corrente
-    /*public static int calcolaPuntiOttenuti(Parola _parola, Tabella _tab) throws IOException
+    public static int calcolaPuntiOttenuti(Parola _parola, Tabella _tab) throws IOException
     {
         int punteggio = 0;
+        int cont2P=0;
+        int cont3P=0;
 
         //assegnamento del moltiplicatore ad ogni casella
         _tab.assegnaMoltiplicatori();
 
         //scorrimento di tutte le lettere
-        for(int i=0; i < _parola.lunghezza; i++){
-            punteggio+=_parola.vettore.get(i).calcolaLettera();
-        }
-    }*/
+        for(int i=0; i < _parola.lunghezza; i++)
+            //calcolo del punteggio di ogni singola casella 
+            punteggio += _tab.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].calcolaLettera();
+
+        //verifico se nelle caselle in cui si inserisce la parola è presente uno o più moltiplicatori di parola
+        //----------si effettuano i seguenti due controlli perchè se una parola passa su diversi moltiplicatori di parola essi si moltiplicano tra loro----------\\
+
+        //moltiplicatori2P
+        cont2P = _tab.contaMoltiplicatoriParola(_parola, "2P");
+        //moltiplicatori3P
+        cont3P = _tab.contaMoltiplicatoriParola(_parola, "3P");
+
+        //----------a questo punto punteggio contiene la somma dei punti di ogni casella, in più sono salvati i numeri riguardanti quanti sono i moltiplicatori di parola----------\\
+        
+        //calcolo definitivo (punteggio * moltiplicatori)
+        //1. moltiplicazione del punteggio per tutti i 2P
+        //scorrimento di tutti i moltiplicatori di questo tipo
+        for(int i=0; i<cont2P; i++)
+            //moltiplicazione per ogni moltiplicatore 2P
+            punteggio = punteggio*2;
+        //2. moltiplicazione del punteggio per tutti i 3P
+        //scorrimento di tutti i moltiplicatori di questo tipo
+        for(int i=0; i<cont3P; i++)
+            //moltiplicazione per ogni moltiplicatore 3P
+            punteggio = punteggio*3;
+
+        //restituzione del punteggio ottenuto con la mossa dell'utente
+        return punteggio;
+    }
 }
