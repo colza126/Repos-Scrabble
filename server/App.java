@@ -20,10 +20,17 @@ public class App {
         server.start(porta);
         //ricezione del messaggio
         int numeroGiocatori = 0;
+        int circologiocatori = 1;
+        
         while (true) {
-            
+            System.out.println("inizio ciclo");
+            if(circologiocatori <= numeroGiocatori){
+                circologiocatori = 1;
+                System.out.println(circologiocatori);
+            }
         
             input = server.ricevi();
+            System.out.println(input);
 
             //----------a questo punto input può contenere due informazioni diverse: numero di giocatori o parola inserita----------\\
             //1. input iniziale, comunicazione del numero di giocatori nella partita --> formato: n%4
@@ -54,18 +61,27 @@ public class App {
                 listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
                 System.out.println(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere());
                 server.inviaMessaggio(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
-            }else if(numeroGiocatori >= 2){
-                //procedi con il gioco
+            }else {
+                System.out.println("entro nell'else");
+            //if(numeroGiocatori >= 2){
+               //procedi con il gioco
 
                 //a questo punto la partita è iniziata e si devono gestire le azioni dei giocatori
                 //2. inserimento di una parola --> formato: p1%4/s,1,1;i,1,2;u,1,3;m,1,4 (nome giocatore%lunghezza parola/lettera,x,y;altre lettere ... )
                 //controllo sull'input
-                if(input.split("%")[0].charAt(0) == 'p'){
-                    //creazione di una parola (la stringa precedente viene convertita in un oggetto)
-                    Parola parolaClient = new Parola(input.split("%")[1]);
+                    String[] paroleValori = input.split("%");
 
-                    //----------a questo punto parola contiene l'input del client suddiviso in un insieme di attributi----------\\
+                    String[] valori = paroleValori[1].split(";");
+
+                    String parolaTotale = "";
+
+                    for (int i = 0; i < valori.length; i+=3) {
+                        parolaTotale += valori[i];
+                    }
                     
+                    //creazione di una parola (la stringa precedente viene convertita in un oggetto)
+                    Parola parolaClient = new Parola(parolaTotale);
+
                     //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
                     String statoInserimento = tab.controlloMaster(parolaClient);
 
@@ -82,10 +98,10 @@ public class App {
                         int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
     
                         //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
-                        server.inviaMessaggio(statoInserimento);
+                        server.inviaMessaggio(listaGiocatori.nomeGiocatore(circologiocatori) +";"+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n");
 
                     }
-                }
+                circologiocatori++;
             }
 
             
