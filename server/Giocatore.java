@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Random;
 
 //classe che gestisce i giocatori
@@ -24,7 +25,7 @@ public class Giocatore {
         //scorrimento del vettore di lettere
         for (int i = 0; i < lettereOgniGiocatore; i++) 
             //inizializzazione di ogni lettera
-            lettereDisponibili[i] = 0;
+            lettereDisponibili[i] = ' ';
     }
 
     //generazione di una consonante casuale
@@ -65,7 +66,7 @@ public class Giocatore {
         for (int i = 0; i < lettereDisponibili.length; i++) {
 
             //controllo se alla posizione corrente non è stata assegnata la lettera
-            if(lettereDisponibili[i] == 0){
+            if(lettereDisponibili[i] == ' '){
                 //se la posizione corrente è pari (casella 8/ casella 22 ecc.)
                 if(i % 2 == 0)
                     //assegnamento di una vocale alla posizione corrente
@@ -87,5 +88,15 @@ public class Giocatore {
             tmp += lettereDisponibili[i]+";";
         }
         return tmp;
+    }
+
+    public void RimuoviLettereUsate(List<Lettera> lettere){
+        for (int i = 0; i < lettere.size(); i++) {
+            for (int j = 0; j < lettereDisponibili.length; j++) {
+                if(lettere.get(i).contenuto == lettereDisponibili[j]){
+                    lettereDisponibili[j] = ' ';
+                }
+            }
+        }
     }
 }

@@ -124,7 +124,7 @@ public class Game1 : Game
             {
                 cords.Add(new(int.Parse(valori[j]), int.Parse(valori[j + 1])));
                 j += 2;
-                i--;
+                i = i - 2;
             }
 
 

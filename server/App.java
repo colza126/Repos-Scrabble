@@ -24,7 +24,7 @@ public class App {
         String lQuery;
         while (true) {
             System.out.println("inizio ciclo");
-            if(circologiocatori <= numeroGiocatori){
+            if(circologiocatori > numeroGiocatori){
                 circologiocatori = 1;
                 System.out.println(circologiocatori);
             }
@@ -53,17 +53,19 @@ public class App {
 
             } */
             //risposta dell'avvenuto inserimento del numero di giocatori
+
+
             if(input.equals("Nuovo Giocatore")){
                 String nomegiocatore = "";
                 numeroGiocatori++;
-                nomegiocatore ="giocatore numero: " + listaGiocatori.vettore.size()+1; 
+                nomegiocatore = "giocatore numero: " + listaGiocatori.vettore.size()+1;
                 listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()+1));
                 listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
                 lQuery = nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere();
-                System.out.println(lQuery);
+                System.out.println("mando al client" + lQuery);
                 server.inviaMessaggio(lQuery+"\n");
             }else {
-                System.out.println("entro nell'else");
+                System.out.println("giocatori esistente");
             //if(numeroGiocatori >= 2){
                //procedi con il gioco
 
@@ -72,11 +74,8 @@ public class App {
                 //controllo sull'input
                     String[] paroleValori = input.split("%");
 
-                    
-
                     //String parolaTotale = "";
 
-                    
                     
                     //creazione di una parola (la stringa precedente viene convertita in un oggetto)
                     Parola parolaClient = new Parola(paroleValori[1]);
@@ -90,15 +89,22 @@ public class App {
                         //scrittura al client del tipo di errore effettuato
                         server.inviaMessaggio("S;"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
                     else{
+
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
                         //inserimento della parola corretta all'interno della tabella
                         tab.aggiungiParola(parolaClient);
-    
+
+                        listaGiocatori.cercaGiocatore(circologiocatori).RimuoviLettereUsate(parolaClient.vettore);
+                        listaGiocatori.cercaGiocatore(circologiocatori).assegnaLettere();
+
                         //conteggio dei punti effettuati dalla giocata
                         int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
-                        
-                        String parolaGiusta = listaGiocatori.nomeGiocatore(circologiocatori) +";"+tab.tabellaInStringa()+";"+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n";
+                        listaGiocatori.cercaGiocatore(circologiocatori).punteggio += punteggio;
+
+                        String parolaGiusta = listaGiocatori.nomeGiocatore(circologiocatori) +";"+tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n";
                         //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
+
+                        System.out.println("inviato al client:" + parolaGiusta);
                         server.inviaMessaggio(parolaGiusta);
 
                     }

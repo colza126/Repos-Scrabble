@@ -330,10 +330,12 @@ class Tabella {
         //----------a questo punto parola è sicuramente corretta per cui viene inserita nella tabella----------\\
 
         //scorrimento di tutte le lettere
-        for(int i=0; i < _parola.lunghezza; i++)
+        for(int i=0; i < _parola.lunghezza; i++){
             //inserimento di ogni lettera nella posizione corretta della casella
             this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera = _parola.vettore.get(i).contenuto;
+            //_parola.vettore.get(i).x;
 
+        }
         //la parola è stata inserita all'interno della tabella
     }
 
@@ -432,7 +434,7 @@ class Tabella {
         for (int i = 0; i < tabella.length; i++) {
             for (int j = 0; j < tabella.length; j++) {
                 if(tabella[i][j].lettera != ' '){
-                    output+= tabella[i][j].lettera+";"+tabella[i][j].x+";"+tabella[i][j].y+";";
+                    output+= tabella[i][j].lettera+";"+i+";"+j+";";
                 }
             }
         }

@@ -24,11 +24,11 @@ public class GestioneGiocatori {
         return null;
     }
     public String nomeGiocatore(int id){
-            for (int i = 0; i < vettore.size(); i++) {
-                if(vettore.get(i).id == id){
-                    return vettore.get(i).nome;
-                }
+        for (int i = 0; i < vettore.size(); i++) {
+            if(vettore.get(i).id == id){
+                return vettore.get(i).nome;
             }
-            return "non trovato";
+        }
+        return "non trovato";
     }
 }
