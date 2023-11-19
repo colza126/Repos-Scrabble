@@ -40,6 +40,7 @@ public  class  GameManager
                 casels.Add(new(casella, new(21 + ((j - 1) * 49), 21 + ((i - 1) * 50)),new(j,i), targettable));
             }
         }
+        int lettereUsabili = 1;
         //per il numero di lettere presenti nella lista
         for (int i = 0; i < lettereLista.Count; i++)
         {
@@ -48,15 +49,16 @@ public  class  GameManager
 
             //se e' specificata una posizione significa che
             //e' una lettere gia posizionata
-            if (posizioni.Count-1 > i)
+            if (posizioni.Count> i)
             {
-                letters.Add(new(lettere, new(posizioni[i].x * 48 - 21, posizioni[i].y * 48 - 21), lettereLista[i], false)) ;
+                letters.Add(new(lettere, new(posizioni[i].x * 48 - 20, posizioni[i].y * 48 - 19), lettereLista[i], false)) ;
 
             }
             else
             {
                 //altrimenti le restanti alla fine sono lettere che il giocatore puo utilizzare
-                letters.Add(new(lettere, new(200 + (i * 48), 800), lettereLista[i], true));
+                letters.Add(new(lettere, new(200 + (lettereUsabili * 48), 800), lettereLista[i], true));
+                lettereUsabili++;
             }
 
         }

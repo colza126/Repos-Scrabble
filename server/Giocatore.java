@@ -9,6 +9,7 @@ public class Giocatore {
     public int id;
     public char[] lettereDisponibili;
     public int punteggio;
+    public boolean primaGiocata;
 
     //metodi
     //costruttore di default
@@ -17,6 +18,7 @@ public class Giocatore {
         this.id = id;
         //numero di lettere che ha a disposizione ogni giocatore
         int lettereOgniGiocatore = 8;
+        primaGiocata = false;
 
         //punteggio iniziale
         punteggio = 0;

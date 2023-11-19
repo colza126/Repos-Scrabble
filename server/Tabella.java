@@ -30,8 +30,42 @@ class Tabella {
         this.tabella = _tabella;
     }
 
-    //metodo nel quale si richiamano tutti i controlli
+
+
     public String controlloMaster(Parola _parola){
+        char dir = _parola.checkDirezione();
+        String parolaFinale = "";
+
+
+        if(dir == 'l'){
+
+            if(controllaEstremi(_parola,dir)){
+
+            }else{
+
+            }
+            
+        }else if(dir == 'r'){
+            
+            if(controllaEstremi(_parola,dir)){
+                
+            }else{
+
+            }
+            
+        }
+
+        if(!checkDizionario(parolaFinale)){
+            return "-1";
+        }
+
+
+        return parolaFinale;
+
+    }
+
+    //metodo nel quale si richiamano tutti i controlli
+    public String controlloMasterPP(Parola _parola){
         //variabile d'appoggio
         boolean work=true;
         char direction= ' ';
@@ -64,7 +98,7 @@ class Tabella {
         
         //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
         //verifica delle caselle
-        work = controllaEstremi(_parola, direction);
+        //work = controllaEstremi(_parola, direction);
         //controllo integrità
         if(work == false)
             return "La parola deve essere prceduta e seguita da una casella vuota o parte del bordo della tabella";
@@ -105,7 +139,7 @@ class Tabella {
             for(int i=0; i<_parola.lunghezza-1;i++){
                 //controllo che le x siano sempre uguali mentre la y vari di +1 per ogni lettera
                 //controlli negati per conrassegnare le parole inserite in mniera errata
-                if(_parola.vettore.get(i).y != _parola.vettore.get(i+1).y + 1)
+                if(_parola.vettore.get(i).y != _parola.vettore.get(i+1).y - 1)
                     //parola inserita in maniera errata
                     return false;
             }
@@ -269,7 +303,8 @@ class Tabella {
         for(int i=0; i < _parola.lunghezza;i++){
             //controllo per ogni lettera se la tabella, nella casella in cui si vuole inserire quella lettera non è piena
             if(this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera != _parola.vettore.get(i).contenuto && this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera != ' ' )
-                return false;
+                
+            return false;
         }
 
         //se si passano i vari controlli significa che la parola è stta inserita correttamente
@@ -290,6 +325,48 @@ class Tabella {
         for(int i=0; i < _parola.lunghezza; i++)
             //aggiunta di ogni carattere alla parola
             parola+=_parola.vettore.get(i).contenuto;
+
+        //scorrimento di tutto il dizionario e confronta della parola inserita con quelle del dizionario stesso
+
+        //gestione errori
+        try {
+            //percorso del file dizionario
+            File file = new File("parole.txt");
+            
+            //creazione scanner per la lettura del file
+            Scanner scanner = new Scanner(file);
+            
+            //scorrimento di tutte le parole del file
+            while (scanner.hasNext()) {
+                //lettura di ogni parola del dizionario
+                parolaDizionario=scanner.nextLine();
+
+                //confronto della parola inserita con ogni parola del dizionario
+                if(parola.equals(parolaDizionario))
+                    //parola esistente
+                    return true;
+            }
+            
+            //chiusura sanner
+            scanner.close();
+        } catch (FileNotFoundException e) { //gestione errori
+            e.printStackTrace();
+        }
+
+        //se si passano i vari controlli significa che la parola inseerita non è corretta
+        return false;
+
+        //return true--> parola inserita correttamente (parola esistente nel dizionario italiano)
+        //return false--> parola non inserita correttamente (non sensata)
+    }
+
+    public boolean checkDizionario(String _parola){
+        //salvataggio della parola inserita in una stringa
+        //variabili di lavoro
+        String parola = _parola;
+        String parolaDizionario = "";
+
+        
 
         //scorrimento di tutto il dizionario e confronta della parola inserita con quelle del dizionario stesso
 

@@ -66,7 +66,7 @@ public class App {
                 server.inviaMessaggio(lQuery+"\n");
             }else {
                 System.out.println("giocatori esistente");
-            //if(numeroGiocatori >= 2){
+                //if(numeroGiocatori >= 2){
                //procedi con il gioco
 
                 //a questo punto la partita è iniziata e si devono gestire le azioni dei giocatori
@@ -79,15 +79,22 @@ public class App {
                     
                     //creazione di una parola (la stringa precedente viene convertita in un oggetto)
                     Parola parolaClient = new Parola(paroleValori[1]);
-
+                    String statoInserimento = "";
                     //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-                    String statoInserimento = tab.controlloMaster(parolaClient);
+                    if(listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata == false){
+
+                        statoInserimento = tab.controlloMasterPP(parolaClient);
+                        listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata = true;
+                    }else{
+                        
+                        statoInserimento = tab.controlloMaster(parolaClient);
+                    }
                     System.out.println(statoInserimento);
 
                     //controllo se è stato passato un messaggio d'errore
                     if(statoInserimento != "")
                         //scrittura al client del tipo di errore effettuato
-                        server.inviaMessaggio("S;"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+                        server.inviaMessaggio("S;" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
                     else{
 
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
