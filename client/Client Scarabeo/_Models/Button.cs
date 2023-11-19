@@ -22,14 +22,14 @@ namespace Client_Scarabeo._Models
             _rect = new((int)p.X, (int)p.Y, t.Width, t.Height);
         }
 
-        public void Update(ConnectionManager c)
+        public void Update()
         {
             if (Globals.MouseCursor.Intersects(_rect))
             {
                 _shade = Color.DarkGray;
                 if (Globals.Clicked)
                 {
-                    Click(c);
+                    Click();
                 }
             }
             else
@@ -40,10 +40,10 @@ namespace Client_Scarabeo._Models
 
         public event EventHandler OnClick;
 
-        private void Click(ConnectionManager c)
+        private void Click()
         {
             OnClick?.Invoke(this, EventArgs.Empty);
-            c.SendMessage(DragDropManager.messaggio);
+            Game1.connectionManager.SendMessage(DragDropManager.messaggio+"\n");
         }
 
         public void Draw()

@@ -13,16 +13,16 @@ public class Lettera {
         this.y=-1;
     }
     //costruttore parametrico
-    public Lettera(String _info){
+    public Lettera(String _lettera,String x, String y){
         //split della lettera e delle coordinate
-        String[] split =_info.split(",");
+        
 
         //salvataggio attributi
         //lettera
-        this.contenuto=split[0].charAt(0);
+        this.contenuto= _lettera.charAt(0); 
         //x
-        this.x=split[1].charAt(0);
+        this.x= Integer.parseInt(x);
         //y
-        this.y=split[2].charAt(0);
+        this.y = Integer.parseInt(y);
     }
 }

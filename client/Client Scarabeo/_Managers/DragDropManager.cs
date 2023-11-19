@@ -73,6 +73,11 @@ public static class DragDropManager
 
                 messaggio += letters.ElementAt(indexItem)+";";
                 messaggio += _cord_targ.ElementAt(i).x + ";" + _cord_targ.ElementAt(i).y + ";";
+
+                letters.RemoveAt(indexItem);
+                _cord_targ.RemoveAt(i);
+
+
                 _draggables.RemoveAt(indexItem);
                 _targets.RemoveAt(i);
                 break;

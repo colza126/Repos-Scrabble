@@ -10,7 +10,7 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private GameManager _gameManager;
-    private ConnectionManager connectionManager;
+    public static ConnectionManager connectionManager;
     private static String nomeGiocatore;
 
     static bool IsLettera(string carattere)
@@ -110,7 +110,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         _spriteBatch.Draw(Globals.Content.Load<Texture2D>("printable-scrabble-board_326273-3013729147"),new Vector2(0,0),Color.White);
-        //_spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
+        _spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
         _gameManager.Draw();
         _spriteBatch.End();
 

@@ -71,16 +71,14 @@ public class App {
                 //controllo sull'input
                     String[] paroleValori = input.split("%");
 
-                    String[] valori = paroleValori[1].split(";");
+                    
 
-                    String parolaTotale = "";
+                    //String parolaTotale = "";
 
-                    for (int i = 0; i < valori.length; i+=3) {
-                        parolaTotale += valori[i];
-                    }
+                    
                     
                     //creazione di una parola (la stringa precedente viene convertita in un oggetto)
-                    Parola parolaClient = new Parola(parolaTotale);
+                    Parola parolaClient = new Parola(paroleValori[1]);
 
                     //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
                     String statoInserimento = tab.controlloMaster(parolaClient);
