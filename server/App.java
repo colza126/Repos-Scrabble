@@ -83,6 +83,7 @@ public class App {
 
                     //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
                     String statoInserimento = tab.controlloMaster(parolaClient);
+                    System.out.println(statoInserimento);
 
                     //controllo se è stato passato un messaggio d'errore
                     if(statoInserimento != "")
@@ -95,9 +96,10 @@ public class App {
     
                         //conteggio dei punti effettuati dalla giocata
                         int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
-    
+                        
+                        String parolaGiusta = listaGiocatori.nomeGiocatore(circologiocatori) +";"+tab.tabellaInStringa()+";"+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n";
                         //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
-                        server.inviaMessaggio(listaGiocatori.nomeGiocatore(circologiocatori) +";"+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n");
+                        server.inviaMessaggio(parolaGiusta);
 
                     }
                 circologiocatori++;

@@ -46,11 +46,11 @@ public class Parola {
         char direzione = ' ';
         
         //parola inserita in verticale
-        if((this.vettore.get(0).x == this.vettore.get(vettore.size()-1).x) && (this.vettore.get(0).y == this.vettore.get(vettore.size()-1).y))
+        if((this.vettore.get(0).x == this.vettore.get(vettore.size()-1).x) && (this.vettore.get(0).y != this.vettore.get(vettore.size()-1).y))
             direzione='l';      //l = low         
 
         //parola inserita in orizzontale
-        else if((this.vettore.get(0).x != this.vettore.get(vettore.size()-1).x) && (this.vettore.get(0).y != this.vettore.get(vettore.size()-1).y))
+        else if((this.vettore.get(0).x != this.vettore.get(vettore.size()-1).x) && (this.vettore.get(0).y == this.vettore.get(vettore.size()-1).y))
             direzione='r';      //r = right
         
         //----------a questo punto se non c'è stato alcun return vuol dire che quantomeno la prima e l'ultima lettera non sono state inserite in maniera corretta----------\\

@@ -17,6 +17,12 @@ class Tabella {
     //costruttore di default
     public Tabella() {
         this.tabella = new Casella[NUM_CASELLE][NUM_CASELLE];
+        for (int i = 0; i < NUM_CASELLE; i++) {
+            for (int j = 0; j < NUM_CASELLE; j++) {
+                this.tabella[i][j] = new Casella();
+            }
+            
+        }
     }
 
     //costruttore con parametri
@@ -99,21 +105,18 @@ class Tabella {
             for(int i=0; i<_parola.lunghezza-1;i++){
                 //controllo che le x siano sempre uguali mentre la y vari di +1 per ogni lettera
                 //controlli negati per conrassegnare le parole inserite in mniera errata
-                if((_parola.vettore.get(i).x != _parola.vettore.get(i+1).x) || (_parola.vettore.get(i).y != _parola.vettore.get(i+1).y + 1))
+                if(_parola.vettore.get(i).y != _parola.vettore.get(i+1).y + 1)
                     //parola inserita in maniera errata
                     return false;
             }
             //inserimento corretto
             return true;
-        }
-
-        //parola inserita in orizzontale
-        else{
+        }else{
             //scorrimento intera parola
             for(int i=0; i<_parola.lunghezza-1;i++){
                 //controllo che le y siano sempre uguali mentre la x vari di +1 per ogni lettera
                 //controlli negati per conrassegnare le parole inserite in mniera errata
-                if((_parola.vettore.get(i).y != _parola.vettore.get(i+1).y) || (_parola.vettore.get(i).x != _parola.vettore.get(i+1).x + 1))
+                if(_parola.vettore.get(i).x != _parola.vettore.get(i+1).x - 1)
                     //parola inserita in maniera errata
                     return false;
             }
@@ -121,10 +124,8 @@ class Tabella {
             return true;
         }
     }
-    
-    //4. controllo che la casella centrale della tabella sia piena
-    public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
-        //variabile di lavoro
+    /*
+    //variabile di lavoro
         boolean work=true;
 
         //controllo se ci si trova al primo inserimento
@@ -181,9 +182,17 @@ class Tabella {
                 }
             }
         }
+         */
 
         //return true--> parola inserita correttamente per quel che riguarda la casella centrale (che deve essere sempre riempita)
         //return false--> parola non inserita correttamente (casella centrale vuota)
+    //4. controllo che la casella centrale della tabella sia piena
+    public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
+        boolean condizione = true;
+        if(!(tabella[CASELLA_CENTRALE][CASELLA_CENTRALE].lettera == ' ')){
+            condizione = false;
+        }
+        return condizione;
     }
 
     //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
@@ -196,7 +205,7 @@ class Tabella {
             if(_parola.vettore.get(0).y != 0)
                 //se la casella precedente alla prima non è parte del bordo
                 //controllo se la stassa casella è piena
-                if(this.tabella[_parola.vettore.get(0).x][_parola.vettore.get(0).y-1] != null)
+                if(this.tabella[_parola.vettore.get(0).x][_parola.vettore.get(0).y-1].lettera != ' ')
                     //x errata
                     return false;
             
@@ -204,7 +213,7 @@ class Tabella {
             if(_parola.vettore.get(_parola.lunghezza-1).y != NUM_CASELLE)
                 //se la casella superiore all'ultima non è parte del bordo
                 //controllo se la stassa casella è piena
-                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x][_parola.vettore.get(_parola.lunghezza-1).y+1] != null)
+                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x][_parola.vettore.get(_parola.lunghezza-1).y+1] .lettera != ' ')
                     //y errata
                     return false;
         }
@@ -215,7 +224,7 @@ class Tabella {
             if(_parola.vettore.get(0).x != 0)
                 //se la casella precedente alla prima non è parte del bordo
                 //controllo se la stassa casella è piena
-                if(this.tabella[_parola.vettore.get(0).x-1][_parola.vettore.get(0).y] != null)
+                if(this.tabella[_parola.vettore.get(0).x-1][_parola.vettore.get(0).y].lettera != ' ')
                     //x errata
                     return false;
             
@@ -223,7 +232,7 @@ class Tabella {
             if(_parola.vettore.get(_parola.lunghezza-1).x != NUM_CASELLE)
                 //se la casella superiore all'ultima non è parte del bordo
                 //controllo se la stassa casella è piena
-                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x+1][_parola.vettore.get(_parola.lunghezza-1).y] != null)
+                if(this.tabella[_parola.vettore.get(_parola.lunghezza-1).x+1][_parola.vettore.get(_parola.lunghezza-1).y].lettera != ' ')
                     //y errata
                     return false;
         }
@@ -259,7 +268,7 @@ class Tabella {
         //scorrimento di tutte le lettere della parola
         for(int i=0; i < _parola.lunghezza;i++){
             //controllo per ogni lettera se la tabella, nella casella in cui si vuole inserire quella lettera non è piena
-            if(this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y] !=null)
+            if(this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera != _parola.vettore.get(i).contenuto && this.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].lettera != ' ' )
                 return false;
         }
 
@@ -298,7 +307,7 @@ class Tabella {
                 parolaDizionario=scanner.nextLine();
 
                 //confronto della parola inserita con ogni parola del dizionario
-                if(parola == parolaDizionario)
+                if(parola.equals(parolaDizionario))
                     //parola esistente
                     return true;
             }
