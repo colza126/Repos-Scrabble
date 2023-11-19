@@ -55,6 +55,15 @@ public static class DragDropManager
             }
         }
     }
+    public static void Cleanup()
+    {
+        // Add any cleanup logic here, if needed
+        _draggables.Clear();
+        letters.Clear();
+        _targets.Clear();
+        _cord_targ.Clear();
+        messaggio = "";
+    }
 
     //controllo target
     private static void CheckTarget()

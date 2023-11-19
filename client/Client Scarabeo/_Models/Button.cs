@@ -44,6 +44,9 @@ namespace Client_Scarabeo._Models
         {
             OnClick?.Invoke(this, EventArgs.Empty);
             Game1.connectionManager.SendMessage(DragDropManager.messaggio+"\n");
+            DragDropManager.Cleanup();
+            GameManager.cleanUp();
+            Game1.aggiornaGioco();
         }
 
         public void Draw()

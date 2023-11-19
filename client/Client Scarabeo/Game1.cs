@@ -9,9 +9,14 @@ public class Game1 : Game
 {
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private GameManager _gameManager;
+    public static GameManager _gameManager;
     public static ConnectionManager connectionManager;
     private static String nomeGiocatore;
+    public static List<Coordinate> cords;
+    public static List<string> letters;
+
+
+    
 
     static bool IsLettera(string carattere)
     {
@@ -49,42 +54,20 @@ public class Game1 : Game
         connectionManager.Connect();
         connectionManager.SendMessage("Nuovo Giocatore\n");
 
+        Globals.Content = Content;
+        aggiornaGioco();
 
-        //prendo valori e lettere
-        String[] valori = connectionManager.ReceiveMessage().Split(";");
 
-        List<string> letters = new List<string>();
-        List<Coordinate> cords = new List<Coordinate>();
-        nomeGiocatore = valori[0];
-        DragDropManager.messaggio += nomeGiocatore+"%";
-        int j = 1;
-        //riempio l'array lettere di valori in modo da aggiornalo
-        int lunghezzaAttuale = letters.Count;
-        for (int i = 0; i < 8- lunghezzaAttuale && valori[j] != null; i++)
-        {
-            if (IsLettera(valori[j]))
-            {
-                letters.Add(valori[j]);
-                j++;
-            }
-            else
-            {
-                cords.Add(new(int.Parse(valori[j]), int.Parse(valori[j + 1])));
-                j += 2;
-            }
-            
-            
-        } 
-      
+
         _graphics.PreferredBackBufferWidth = 735;
         _graphics.PreferredBackBufferHeight = 853;
         _graphics.ApplyChanges();
 
-        Globals.Content = Content;
-        _gameManager = new(letters, cords);
 
         base.Initialize();
     }
+
+
 
     protected override void LoadContent()
     {
@@ -115,5 +98,39 @@ public class Game1 : Game
         _spriteBatch.End();
 
         base.Draw(gameTime);
+    }
+    public static void aggiornaGioco()
+    {
+        //prendo valori e lettere
+        String[] valori = connectionManager.ReceiveMessage().Split(";");
+
+        nomeGiocatore = valori[0];
+
+        letters = new List<string>();
+        cords = new List<Coordinate>();
+
+        DragDropManager.messaggio += nomeGiocatore + "%";
+        int j = 1;
+        //riempio l'array lettere di valori in modo da aggiornalo
+        int lunghezzaAttuale = letters.Count;
+        for (int i = 0; i < 8 - lunghezzaAttuale && valori[j] != null; i++)
+        {
+            if (IsLettera(valori[j]))
+            {
+                letters.Add(valori[j]);
+                j++;
+            }
+            else
+            {
+                cords.Add(new(int.Parse(valori[j]), int.Parse(valori[j + 1])));
+                j += 2;
+            }
+
+
+        }
+        _gameManager = new(letters, cords);
+
+
+
     }
 }

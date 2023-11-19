@@ -3,10 +3,10 @@ using Client_Scarabeo._Managers;
 
 namespace ClientScarabeo;
 
-public class GameManager
+public  class  GameManager
 {
-    private readonly List<Lettera> letters = new();
-    private readonly List<Casella> casels = new();
+    public static List<Lettera> letters = new();
+    public static List<Casella> casels = new();
 
     private readonly UIManager _ui = new();
 
@@ -68,6 +68,9 @@ public class GameManager
         DragDropManager.Update();
         _ui.Update();
     }
+
+
+
     public string aggiornaMessaggio()
     {
         return DragDropManager.messaggio;
@@ -85,5 +88,11 @@ public class GameManager
         {
             item.Draw();
         }
+    }
+
+    public static void cleanUp()
+    {
+        letters = new();
+        casels = new();
     }
 }

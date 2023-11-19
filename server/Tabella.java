@@ -41,20 +41,20 @@ class Tabella {
         direction = _parola.checkDirezione();
         //controllo integrità
         if(direction == ' ')
-            return "La parola non è stata inserita in caselle conseutive né in orizzontale, né in verticale";
+            return "La parola non e stata inserita in caselle conseutive ne in orizzontale, ne in verticale";
 
         //3. controllo che la parola sia stata inserita in caselle consecutive (verticale o orizzontale)
         work = controllaLinearita(_parola, direction);
         //controllo integrità
         if(work == false)
-            return "La parola non è stata inserita in caselle conseutive né in orizzontale, né in verticale";
+            return "La parola non e stata inserita in caselle conseutive ne in orizzontale, ne in verticale";
 
         //4. controllo che la casella centrale non sia vuota
         //controllo se ci si trova nel primo inserimento --> in questo caso la casella centrale deve obbligatoriamente essere occupata
         work = controllaCasellaCentrale(_parola, direction);
         //controllo integrità
         if(work == false)
-            return "La casella centrale non può essere lasciata libera";
+            return "La casella centrale non puo essere lasciata libera";
         
         //5. controllo che la casella precedente all'inizio e quella successiva alla fine della parola siano vuote (oppure che esse siano parte del bordo)
         //verifica delle caselle
@@ -75,7 +75,7 @@ class Tabella {
         work = controlloCasellePiene(_parola, direction);
         //controllo integrità
         if(work == false)
-            return "Non si possono sovrascrivere delle caselle già riempite";
+            return "Non si possono sovrascrivere delle caselle gia riempite";
 
         //7. controllo che la parola inserita sia salvata nel dizionario
         //verifica dell'esistenza della parola

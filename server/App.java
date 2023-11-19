@@ -21,7 +21,7 @@ public class App {
         //ricezione del messaggio
         int numeroGiocatori = 0;
         int circologiocatori = 1;
-        
+        String lQuery;
         while (true) {
             System.out.println("inizio ciclo");
             if(circologiocatori <= numeroGiocatori){
@@ -59,8 +59,9 @@ public class App {
                 nomegiocatore ="giocatore numero: " + listaGiocatori.vettore.size()+1; 
                 listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()+1));
                 listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
-                System.out.println(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere());
-                server.inviaMessaggio(nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+                lQuery = nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere();
+                System.out.println(lQuery);
+                server.inviaMessaggio(lQuery+"\n");
             }else {
                 System.out.println("entro nell'else");
             //if(numeroGiocatori >= 2){
@@ -86,7 +87,7 @@ public class App {
                     //controllo se è stato passato un messaggio d'errore
                     if(statoInserimento != "")
                         //scrittura al client del tipo di errore effettuato
-                        server.inviaMessaggio(statoInserimento);
+                        server.inviaMessaggio("S;"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
                     else{
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
                         //inserimento della parola corretta all'interno della tabella
