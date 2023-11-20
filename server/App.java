@@ -61,7 +61,7 @@ public class App {
                 nomegiocatore = "giocatore numero: " + listaGiocatori.vettore.size()+1;
                 listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()+1));
                 listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
-                lQuery = nomegiocatore+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere();
+                lQuery = listaGiocatori.cercaGiocatore(numeroGiocatori).punteggio+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere();
                 System.out.println("mando al client" + lQuery);
                 server.inviaMessaggio(lQuery+"\n");
             }else {
@@ -86,17 +86,18 @@ public class App {
                         statoInserimento = tab.controlloMasterPP(parolaClient);
                         listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata = true;
                     }else{
-                        
                         statoInserimento = tab.controlloMaster(parolaClient);
                     }
                     System.out.println(statoInserimento);
 
                     //controllo se è stato passato un messaggio d'errore
-                    if(statoInserimento != "")
-                        //scrittura al client del tipo di errore effettuato
-                        server.inviaMessaggio("S;" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
-                    else{
+                    if(statoInserimento != ""){
 
+                    
+                        //scrittura al client del tipo di errore effettuato
+                        
+                        server.inviaMessaggio(listaGiocatori.cercaGiocatore(circologiocatori).punteggio+";" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+                    }else{
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
                         //inserimento della parola corretta all'interno della tabella
                         tab.aggiungiParola(parolaClient);
@@ -108,7 +109,7 @@ public class App {
                         int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
                         listaGiocatori.cercaGiocatore(circologiocatori).punteggio += punteggio;
 
-                        String parolaGiusta = listaGiocatori.nomeGiocatore(circologiocatori) +";"+tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n";
+                        String parolaGiusta = listaGiocatori.cercaGiocatore(circologiocatori).punteggio +";"+tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n";
                         //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
 
                         System.out.println("inviato al client:" + parolaGiusta);
@@ -137,13 +138,12 @@ public class App {
         _tab.assegnaMoltiplicatori();
 
         //scorrimento di tutte le lettere
-        for(int i=0; i < _parola.lunghezza; i++)
+        for(int i=0; i < _parola.vettore.size(); i++)
             //calcolo del punteggio di ogni singola casella 
             punteggio += _tab.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].calcolaLettera();
+            System.out.println(punteggio);
 
-        //verifico se nelle caselle in cui si inserisce la parola è presente uno o più moltiplicatori di parola
-        //----------si effettuano i seguenti due controlli perchè se una parola passa su diversi moltiplicatori di parola essi si moltiplicano tra loro----------\\
-
+            
         //moltiplicatori2P
         cont2P = _tab.contaMoltiplicatoriParola(_parola, "2P");
         //moltiplicatori3P
@@ -167,33 +167,5 @@ public class App {
         return punteggio;
     }
 
-    //ricezione del messaggio dal client
-    /* 
-    public static String attendiParola(GestioneGiocatori giocatori) throws IOException
-    {
-        //variabile d'appoggio
-        String tmp="";
-
-        //----------implementare la ricezione del messaggio del client----------\\
-
-        //----------il messaggio ppuò essere di due tipi: ingresso in partita / esecuzione mossa----------\\
-        //controllo se il messaggio è un richiesta di ingresso in partita
-        if(tmp.split(";")[0].charAt(0) == 'i'){       //la frase del client è "i;nome"
-            //creazione del nuovo giocatore 
-            Giocatore giocatore = new Giocatore(tmp.split(";")[1]);
-            //assegnamento delle lettere a disposizione
-            giocatore.assegnaLettere();
-            //aggiunta all'interno della lista
-            giocatori.vettore.add(giocatore);
-
-            //inserimento giocatore avvenuto
-            //inviaRisposta(giocatore.restituisciLettere());
-            //uscita dal metodo
-            return "";
-        }
-
-        //restituzione del messaggio letto
-        return tmp;
-        
-    }*/
+    
 }

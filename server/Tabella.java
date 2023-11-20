@@ -30,37 +30,62 @@ class Tabella {
         this.tabella = _tabella;
     }
 
-
+    
 
     public String controlloMaster(Parola _parola){
         char dir = _parola.checkDirezione();
+
+
         String parolaFinale = "";
 
 
+        int j = 0;
         if(dir == 'l'){
+            int x = _parola.vettore.get(0).x;
+            
+            for (int i = 0; i < tabella.length; i++) {
 
-            if(controllaEstremi(_parola,dir)){
+                
+                if(tabella[x][i].lettera != ' '){
+                    parolaFinale += tabella[x][i].lettera;
+                }
+                if (j < _parola.vettore.size()){
 
-            }else{
-
+                    if(_parola.vettore.get(j).y ==  i){
+                        parolaFinale += _parola.vettore.get(j).contenuto;
+                        j++;
+                    }
+                }
             }
+
             
         }else if(dir == 'r'){
-            
-            if(controllaEstremi(_parola,dir)){
-                
-            }else{
+            int y = _parola.vettore.get(0).y;
+            for (int i = 0; i < tabella.length; i++) {
+                if(tabella[i][y].lettera != ' '  ){
+                    
+                    parolaFinale += tabella[i][y].lettera;
 
+                }
+                if (j < _parola.vettore.size()){
+
+                    if(_parola.vettore.get(j).x ==  i){
+                        parolaFinale += _parola.vettore.get(j).contenuto;
+                        j++;
+                    }
+                }
             }
+            
             
         }
 
+        System.out.println();
         if(!checkDizionario(parolaFinale)){
             return "-1";
         }
 
 
-        return parolaFinale;
+        return "";
 
     }
 
@@ -222,9 +247,11 @@ class Tabella {
         //return false--> parola non inserita correttamente (casella centrale vuota)
     //4. controllo che la casella centrale della tabella sia piena
     public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
-        boolean condizione = true;
-        if(!(tabella[CASELLA_CENTRALE][CASELLA_CENTRALE].lettera == ' ')){
-            condizione = false;
+        boolean condizione = false;
+        for (int i = 0; i < _parola.vettore.size(); i++) {
+            if(_parola.vettore.get(i).x == 8 && _parola.vettore.get(i).y == 8){
+                condizione = true;
+            }
         }
         return condizione;
     }
