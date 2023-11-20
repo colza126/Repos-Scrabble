@@ -86,17 +86,18 @@ public class App {
                         statoInserimento = tab.controlloMasterPP(parolaClient);
                         listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata = true;
                     }else{
-                        
                         statoInserimento = tab.controlloMaster(parolaClient);
                     }
                     System.out.println(statoInserimento);
 
                     //controllo se è stato passato un messaggio d'errore
-                    if(statoInserimento != "")
-                        //scrittura al client del tipo di errore effettuato
-                        server.inviaMessaggio("S;" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
-                    else{
+                    if(statoInserimento != ""){
 
+                    
+                        //scrittura al client del tipo di errore effettuato
+                        
+                        server.inviaMessaggio("S;" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+                    }else{
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
                         //inserimento della parola corretta all'interno della tabella
                         tab.aggiungiParola(parolaClient);
