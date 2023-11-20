@@ -12,6 +12,7 @@ public class Game1 : Game
     public static GameManager _gameManager;
     public static ConnectionManager connectionManager;
     private static String nomeGiocatore;
+    private static String punteggio = "0";
     public static List<Coordinate> cords;
     public static List<string> letters;
 
@@ -93,7 +94,7 @@ public class Game1 : Game
 
         _spriteBatch.Begin();
         _spriteBatch.Draw(Globals.Content.Load<Texture2D>("printable-scrabble-board_326273-3013729147"),new Vector2(0,0),Color.White);
-        _spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), DragDropManager.messaggio, new Vector2(100,750), Color.Black);
+        _spriteBatch.DrawString(Globals.Content.Load<SpriteFont>("font"), punteggio, new Vector2(100,750), Color.Black);
         _gameManager.Draw();
         _spriteBatch.End();
 
@@ -104,7 +105,7 @@ public class Game1 : Game
         //prendo valori e lettere
         String[] valori = connectionManager.ReceiveMessage().Split(";");
 
-        nomeGiocatore = valori[0];
+        punteggio = valori[0];
 
         letters = new List<string>();
         cords = new List<Coordinate>();

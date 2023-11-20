@@ -247,9 +247,11 @@ class Tabella {
         //return false--> parola non inserita correttamente (casella centrale vuota)
     //4. controllo che la casella centrale della tabella sia piena
     public boolean controllaCasellaCentrale(Parola _parola, char _direzione){
-        boolean condizione = true;
-        if(!(tabella[CASELLA_CENTRALE][CASELLA_CENTRALE].lettera == ' ')){
-            condizione = false;
+        boolean condizione = false;
+        for (int i = 0; i < _parola.vettore.size(); i++) {
+            if(_parola.vettore.get(i).x == 8 && _parola.vettore.get(i).y == 8){
+                condizione = true;
+            }
         }
         return condizione;
     }
