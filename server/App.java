@@ -105,6 +105,10 @@ public class App {
                         listaGiocatori.cercaGiocatore(circologiocatori).RimuoviLettereUsate(parolaClient.vettore);
                         listaGiocatori.cercaGiocatore(circologiocatori).assegnaLettere();
 
+
+                        for (int i = 0; i < parolaClient.vettore.size(); i++) {
+                            System.out.println(parolaClient.vettore.get(i).contenuto);
+                        }
                         //conteggio dei punti effettuati dalla giocata
                         int punteggio = calcolaPuntiOttenuti(parolaClient, tab);
                         listaGiocatori.cercaGiocatore(circologiocatori).punteggio += punteggio;
@@ -138,11 +142,10 @@ public class App {
         _tab.assegnaMoltiplicatori();
 
         //scorrimento di tutte le lettere
-        for(int i=0; i < _parola.vettore.size(); i++)
+        for(int i=0; i < _parola.vettore.size(); i++){
             //calcolo del punteggio di ogni singola casella 
             punteggio += _tab.tabella[_parola.vettore.get(i).x][_parola.vettore.get(i).y].calcolaLettera();
-            System.out.println(punteggio);
-
+        }
             
         //moltiplicatori2P
         cont2P = _tab.contaMoltiplicatoriParola(_parola, "2P");

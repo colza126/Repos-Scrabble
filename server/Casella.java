@@ -50,17 +50,20 @@ public class Casella{
             while (scanner.hasNext()) {
                 //lettura di ogni lettera del dizionario
                 tmp=scanner.nextLine();
+                System.out.println(tmp);
 
                 //----------a questo punto tmp contiene una stringa del tipo "A,4"----------\\
 
                 //split della stringa
                 //lettera
+                
                 lettera = tmp.split(",")[0].charAt(0);
                 //punteggio
-                punti = Integer.parseInt(tmp.split(",")[1]);
-                
                 //confronto della lettera inserita con ogni lettera del dizionario
-                if(this.lettera == lettera){
+                if(this.lettera == lettera+32){
+                    
+                    punti += Integer.parseInt(tmp.split(",")[1]);
+                    System.out.println(punti);
                     //verifico se la casella corrente ha un moltiplicatore di lettere ("2L" o "3L")
                     //controllo sul moltiplicatore
                     //3L
