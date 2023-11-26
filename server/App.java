@@ -6,7 +6,7 @@ public class App {
         //porta di comunicazione
         int porta = 666;
         //creazione server
-        server server = new server();
+        
 
         //variabili
         //giocatori
@@ -17,20 +17,16 @@ public class App {
         Tabella tab = new Tabella();
 
         //attesa di un client per la comunicazione
-        server.start(porta);
+        server server = new server(porta);
         //ricezione del messaggio
         int numeroGiocatori = 0;
-        int circologiocatori = 1;
+        int circologiocatori = 0;
+        boolean primaGiocata = false;
         String lQuery;
         while (true) {
             System.out.println("inizio ciclo");
-            if(circologiocatori > numeroGiocatori){
-                circologiocatori = 1;
-                System.out.println(circologiocatori);
-            }
+            
         
-            input = server.ricevi();
-            System.out.println(input);
 
             //----------a questo punto input può contenere due informazioni diverse: numero di giocatori o parola inserita----------\\
             //1. input iniziale, comunicazione del numero di giocatori nella partita --> formato: n%4
@@ -55,17 +51,25 @@ public class App {
             //risposta dell'avvenuto inserimento del numero di giocatori
 
 
-            if(input.equals("Nuovo Giocatore")){
+            if(server.start()){
                 String nomegiocatore = "";
-                numeroGiocatori++;
-                nomegiocatore = "giocatore numero: " + listaGiocatori.vettore.size()+1;
-                listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()+1));
+                nomegiocatore = "giocatore numero: " + listaGiocatori.vettore.size();
+                System.out.println(nomegiocatore);
+                listaGiocatori.aggiungiGiocatore(new Giocatore(nomegiocatore,listaGiocatori.vettore.size()));
                 listaGiocatori.cercaGiocatore(numeroGiocatori).assegnaLettere();
                 lQuery = listaGiocatori.cercaGiocatore(numeroGiocatori).punteggio+";"+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere();
-                System.out.println("mando al client" + lQuery);
-                server.inviaMessaggio(lQuery+"\n");
+                System.out.println("mando al client: " + lQuery);
+                server.inviaMessaggio(lQuery+"\n",circologiocatori);
+                circologiocatori++;
+                numeroGiocatori++;
             }else {
-                System.out.println("giocatori esistente");
+                if(circologiocatori >= numeroGiocatori){
+                    circologiocatori = 0;
+                    System.out.println(circologiocatori);
+                }
+
+                input = server.ricevi(circologiocatori);
+                System.out.println(input);
                 //if(numeroGiocatori >= 2){
                //procedi con il gioco
 
@@ -75,29 +79,30 @@ public class App {
                     String[] paroleValori = input.split("%");
 
                     //String parolaTotale = "";
-
+                    
                     
                     //creazione di una parola (la stringa precedente viene convertita in un oggetto)
                     Parola parolaClient = new Parola(paroleValori[1]);
                     String statoInserimento = "";
                     //metodo che controlla l'integrità dell'input del client (direzione della parola, inserimento nelle caselle consecutive, lettere che non escono dalla tabella ecc.)
-                    if(listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata == false){
-
+                    if(primaGiocata == false){
                         statoInserimento = tab.controlloMasterPP(parolaClient);
-                        listaGiocatori.cercaGiocatore(numeroGiocatori).primaGiocata = true;
                     }else{
                         statoInserimento = tab.controlloMaster(parolaClient);
                     }
                     System.out.println(statoInserimento);
 
                     //controllo se è stato passato un messaggio d'errore
-                    if(statoInserimento != ""){
+                    if(statoInserimento != "" && statoInserimento != "a"){
 
                     
                         //scrittura al client del tipo di errore effettuato
                         
-                        server.inviaMessaggio(listaGiocatori.cercaGiocatore(circologiocatori).punteggio+";" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(numeroGiocatori).valoreLettere()+"\n");
+                        server.inviaMessaggio(listaGiocatori.cercaGiocatore(circologiocatori).punteggio+";" + tab.tabellaInStringa()+listaGiocatori.cercaGiocatore(circologiocatori).valoreLettere()+"\n",circologiocatori);
                     }else{
+                        if(statoInserimento == "a"){
+                            primaGiocata = true;
+                        }
                         //----------a questo punto la parola ha passato tutti i controlli, per cui la si può inserire nella tabella e svolgere le operazioni successive----------\\
                         //inserimento della parola corretta all'interno della tabella
                         tab.aggiungiParola(parolaClient);
@@ -117,7 +122,7 @@ public class App {
                         //invio del messaggio contenente la tabella, il punteggio del giocatore e le lettere necessarie
 
                         System.out.println("inviato al client:" + parolaGiusta);
-                        server.inviaMessaggio(parolaGiusta);
+                        server.inviaMessaggio(parolaGiusta,circologiocatori);
 
                     }
                 circologiocatori++;

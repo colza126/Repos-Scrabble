@@ -9,7 +9,7 @@ int port = 666;
 
 ConnectionManager c1 = new ConnectionManager(ip, port);
 c1.Connect();
-c1.SendMessage("Ciao server;sono; client 1\n");
+c1.SendMessage("Nuovo Giocatore");
 String messaggio;
 
 
@@ -18,7 +18,10 @@ Console.WriteLine(messaggio);
 
 while(true)
 {
+    string dato = Console.ReadLine();
+    c1.SendMessage(dato+"\n");
+
+
 
 }
-
 Console.WriteLine("Sto finendo!");

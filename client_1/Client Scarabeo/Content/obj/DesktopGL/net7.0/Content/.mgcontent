@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/A.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/b.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/button.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/c.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/Casella.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/d.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/e.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/f.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/font.spritefont</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/g.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/h.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/i.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/j.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/k.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/l.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/m.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/n.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/o.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/p.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/printable-scrabble-board_326273-3013729147.jpg</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/q.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/r.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/s.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/t.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/u.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/v.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/w.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/x.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/y.png</File>
+    <File>C:/Users/Lorenzo Colzani/Documents/GitHub/Repos-Scrabble/client_1/Client Scarabeo/Content/z.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File>a.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>

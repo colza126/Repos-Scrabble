@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\test_client_tcp.csproj",
+      "projectUniqueName": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\AAAA\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\test_client_tcp.csproj",
       "projectName": "test_client_tcp",
-      "projectPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\test_client_tcp.csproj",
+      "projectPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\AAAA\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\test_client_tcp.csproj",
       "packagesPath": "C:\\Users\\Lorenzo Colzani\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\obj\\",
+      "outputPath": "C:\\Users\\Lorenzo Colzani\\Documents\\GitHub\\AAAA\\Repos-Scrabble\\area_test_tcp\\test_client_tcp_1\\test_client_tcp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

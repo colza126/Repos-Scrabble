@@ -4,72 +4,82 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 public class server {
-    //variabili per la comunicazione
     private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private ArrayList<Socket> clientSockets;
+    private ArrayList<PrintWriter> outs;
+    private ArrayList<BufferedReader> ins;
+    private int timeout = 10000; // timeout in milliseconds (10 seconds)
 
-    public server() {
-
+    public server(int port) throws IOException {
+        this.serverSocket = new ServerSocket(port);
+        this.clientSockets = new ArrayList<>();
+        this.outs = new ArrayList<>();
+        this.ins = new ArrayList<>();
+        serverSocket.setSoTimeout(timeout);
     }
 
-    //attesa di una connessione con il client
-    public void start(int port) throws IOException {
-        //creazione oggetto che attende la connessione con un client
-        serverSocket = new ServerSocket(port);
-        //attesa di un client e salvataggio della stesso
-        clientSocket = serverSocket.accept();
-        //creazione oggetto per inviare dati al client
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        //creazione oggetto per leggere i dati inviati dal client
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    public boolean start() {
+        try {
+            Socket newClientSocket = serverSocket.accept();
+            newClientSocket.setSoTimeout(0); // No timeout on client socket
+
+            PrintWriter newOut = new PrintWriter(newClientSocket.getOutputStream(), true);
+            BufferedReader newIn = new BufferedReader(new InputStreamReader(newClientSocket.getInputStream()));
+
+            clientSockets.add(newClientSocket);
+            outs.add(newOut);
+            ins.add(newIn);
+
+            return true;
+        } catch (IOException e) {
+            // Handle the exception and return false
+            return false;
+        }
     }
 
-    //chiusura delle risorse associate alla connessione
     public void stop() throws IOException {
-        //chiusura dell'oggetto che attende un client
         serverSocket.close();
-        //chiusura dell'oggetto in cui si salva il client
-        clientSocket.close();
-        //chiusura dell'oggetto per inviare dati al client
-        out.close();
-        //chiusura dell'oggetto per la lettura dei dati inviati dal client
-        in.close();           
+        for (int i = 0; i < clientSockets.size(); i++) {
+            clientSockets.get(i).close();
+            outs.get(i).close();
+            ins.get(i).close();
+        }
     }
 
-    //lettura del messaggio del client
-    public String ricevi() throws IOException {
-        //variabile d'appoggio
+   // Lettura del messaggio del client con un timeout di 100 secondi
+    public String ricevi(int giocatore) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-        //buffer per la lettura dei dati inviati dal client
-        char[] buffer = new char[1024]; 
-
-        //variabile in cui tenere conto del numero di byte inviati dal client
+        char[] buffer = new char[1024];
         int bytesRead;
 
-        //lettura di tutti i byte ricevuti
-        while ((bytesRead = in.read(buffer)) != -1) {
-            //aggiunta di tutti i byte alla variabile d'appoggio
-            stringBuilder.append(buffer, 0, bytesRead);
-
-            //controllo se il byte corrente segnala la fine del messaggio
-            if (stringBuilder.toString().contains("\n")) 
-                //fine del ciclo
-                break;
+        // Set the socket timeout to 100 seconds
+        clientSockets.get(giocatore).setSoTimeout(100000);
+        System.out.println("inizio ad aspettare");
+        try {
+            while ((bytesRead = ins.get(giocatore).read(buffer)) != -1) {
+                stringBuilder.append(buffer, 0, bytesRead);
+                if (stringBuilder.toString().contains("\n")) {
+                    break;
+                }
+            }
+        } catch (SocketTimeoutException e) {
+            // Handle the timeout if necessary (you can choose to do nothing here)
         }
 
-        //restituzione della variabile d'appoggio (eliminati gli spazi vuoti)
         return stringBuilder.toString().trim();
     }
 
-    //invio di un messaggio al client
-    public void inviaMessaggio(String messaggio) {
-        //invio del messaggio passato al client (accapo finale)
-        out.println(messaggio);
-        //svuotamento buffer
-        out.flush();
+
+
+
+    public void inviaMessaggio(String message, int id) {
+        
+
+        outs.get(id).println(message);
+        outs.get(id).flush();
     }
 }

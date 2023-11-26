@@ -150,7 +150,7 @@ class Tabella {
             return "La parola inserita non esiste";
 
         //parol inserita correttamente
-        return "";
+        return "a";
     }
 
     //3. controllo che la casella centrale della tabella sia piena

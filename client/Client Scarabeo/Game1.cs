@@ -53,7 +53,7 @@ public class Game1 : Game
         connectionManager = new(ip, port);
         //connessione
         connectionManager.Connect();
-        connectionManager.SendMessage("Nuovo Giocatore\n");
+        connectionManager.SendMessage("Nuovo Giocatore");
 
         Globals.Content = Content;
         aggiornaGioco();

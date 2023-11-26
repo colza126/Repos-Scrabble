@@ -50,8 +50,8 @@ public class Casella{
             while (scanner.hasNext()) {
                 //lettura di ogni lettera del dizionario
                 tmp=scanner.nextLine();
-                System.out.println(tmp);
 
+                
                 //----------a questo punto tmp contiene una stringa del tipo "A,4"----------\\
 
                 //split della stringa
