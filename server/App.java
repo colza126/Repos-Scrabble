@@ -174,6 +174,3 @@ public class App {
         //restituzione del punteggio ottenuto con la mossa dell'utente
         return punteggio;
     }
-
-    
-}
